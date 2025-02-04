@@ -1,3 +1,5 @@
+import Dashboard from "./components/Dashboard"
+import Layout from "./components/Layout"
 
 
 function App() {
@@ -5,9 +7,9 @@ function App() {
 
   return (
     <>
-      <div className="text-red-500">
-        Hello World
-      </div>
+      <Layout>
+        <Dashboard />
+      </Layout>
     </>
   )
 }
