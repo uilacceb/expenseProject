@@ -15,7 +15,7 @@ const WelcomeUser = () => {
           <TbMenu2 size="1.5em" onClick={() => setToggleHamburger(!toggleHamburger)} />
         </button>
         <div>
-          <h1 className="font-mono font-semibold text-3xl pt-4">Welcome username</h1>
+          <h1 className="font-mono font-semibold text-3xl pt-4 lg:text-[50px]">Welcome username</h1>
         </div>
       </div>
       <Balance />

@@ -10,11 +10,11 @@ const ToggleMenu = () => {
   const MenuContent = () => {
     return (
       <div className="flex flex-col mt-20 h-screen w-screen">
-        <div className="flex items-center w-auto pl-10 mb-8 text-xl hover:scale-110 duration-150 cursor-pointer lg:hover:scale-110 origin-left">
+        <div className="flex items-center w-auto pl-10 mb-8 text-xl hover:scale-110 duration-150 cursor-pointer lg:hover:scale-110  lg:w-max ">
           <RxDashboard color="white" size={24} />
           <p className="text-white font-mono pl-4">Dashboard</p>
         </div>
-        <div className="flex items-center w-auto pl-10 text-xl hover:scale-110 duration-150 cursor-pointer lg:hover:scale-110 origin-left">
+        <div className="flex items-center w-auto pl-10 text-xl hover:scale-110 duration-150 cursor-pointer lg:hover:scale-110   lg:w-max ">
           <RiHistoryFill color="white" size={24} />
           <p className="text-white font-mono pl-4">Transaction History</p>
         </div>
