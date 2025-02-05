@@ -1,15 +1,21 @@
 import Dashboard from "./components/Dashboard"
 import Layout from "./components/Layout"
+import { createContext, useState } from "react"
 
+
+export const ExpenseContext = createContext();
 
 function App() {
+  const [toggleHamburger, setToggleHamburger] = useState(false)
 
 
   return (
     <>
-      <Layout>
-        <Dashboard />
-      </Layout>
+      <ExpenseContext.Provider value={{ toggleHamburger, setToggleHamburger }}>
+        <Layout>
+          <Dashboard />
+        </Layout>
+      </ExpenseContext.Provider>
     </>
   )
 }
