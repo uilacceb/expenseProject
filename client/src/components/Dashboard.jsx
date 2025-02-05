@@ -1,5 +1,4 @@
 import WelcomeUser from "./WelcomeUser";
-import Balance from "./Balance";
 import ToggleMenu from "./ToggleMenu";
 
 const Dashboard = () => {
@@ -7,10 +6,11 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="flex flex-col h-screen ">
+      <div className="flex min-h-screen">
         <ToggleMenu />
-        <WelcomeUser />
-        <Balance />
+        <div className="flex flex-col flex-1">
+          <WelcomeUser />
+        </div>
       </div>
     </>
   )
