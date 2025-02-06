@@ -9,4 +9,7 @@
   .label_style {
     @apply text-white font-mono mb-1 font-semibold
   }
+  .toggleMenu-element-div{
+    @apply flex items-center w-auto pl-10 mb-8 text-xl hover:scale-110 duration-150 cursor-pointer lg:hover:scale-110  lg:w-max
+  }
 }

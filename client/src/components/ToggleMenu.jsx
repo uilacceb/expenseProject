@@ -3,6 +3,7 @@ import { RxDashboard } from "react-icons/rx";
 import { RiHistoryFill } from "react-icons/ri";
 import { useContext } from "react";
 import { ExpenseContext } from "../App";
+import { Link } from "react-router-dom";
 
 const ToggleMenu = () => {
   const { toggleHamburger, setToggleHamburger } = useContext(ExpenseContext);
@@ -10,14 +11,20 @@ const ToggleMenu = () => {
   const MenuContent = () => {
     return (
       <div className="flex flex-col mt-20 h-screen w-screen">
-        <div className="flex items-center w-auto pl-10 mb-8 text-xl hover:scale-110 duration-150 cursor-pointer lg:hover:scale-110  lg:w-max ">
-          <RxDashboard color="white" size={24} />
-          <p className="text-white font-mono pl-4">Dashboard</p>
-        </div>
-        <div className="flex items-center w-auto pl-10 text-xl hover:scale-110 duration-150 cursor-pointer lg:hover:scale-110   lg:w-max ">
-          <RiHistoryFill color="white" size={24} />
-          <p className="text-white font-mono pl-4">Transaction History</p>
-        </div>
+        {/* link to dashboard */}
+        <Link to="/" onClick={() => setToggleHamburger(false)}>
+          <div className="toggleMenu-element-div">
+            <RxDashboard color="white" size={24} />
+            <p className="text-white font-mono pl-4">Dashboard</p>
+          </div>
+        </Link>
+        {/* link to transaction history */}
+        <Link to="/transaction-history" onClick={() => setToggleHamburger(false)}>
+          <div className="toggleMenu-element-div ">
+            <RiHistoryFill color="white" size={24} />
+            <p className="text-white font-mono pl-4">Transaction History</p>
+          </div>
+        </Link>
       </div>
     )
   }
