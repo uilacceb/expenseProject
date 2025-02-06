@@ -15,14 +15,14 @@ const AddExpenseForm = () => {
             </legend>
 
             {/* date */}
-            <div className="flex flex-col m-2 lg:w-[70%] w-[90%] lg:my-5">
-              <label htmlFor="date" className="text-white mb-1 font-mono font-semibold self w-auto self-start">Date</label>
+            <div className="attribute_div">
+              <label htmlFor="date" className="label_style">Date</label>
               <input type="date" id="date" name="date" className="p-1 rounded-md"></input>
             </div>
 
             {/* category */}
-            <div className="flex flex-col m-2 lg:w-[70%] w-[90%] font-mono lg:my-5">
-              <label htmlFor="category" className="text-white mb-1 font-semibold ">Category</label>
+            <div className="attribute_div">
+              <label htmlFor="category" className="label_style">Category</label>
               <select name="category" id="category" className="p-2 rounded-md" >
                 <option value="Grocery">Grocery</option>
                 <option value="Income">Income</option>
@@ -39,20 +39,20 @@ const AddExpenseForm = () => {
             </div>
 
             {/* amount */}
-            <div className="flex flex-col  m-2 lg:my-5  lg:w-[70%] w-[90%]">
-              <label htmlFor="amount" className="text-white font-mono mb-1 font-semibold">Amount</label>
+            <div className="attribute_div">
+              <label htmlFor="amount" className="label_style">Amount</label>
               <input type="text" id="amount" name="amount" className="p-2 rounded-md"></input>
             </div>
 
             {/* description */}
-            <div className="flex flex-col  m-2 lg:my-5  lg:w-[70%] w-[90%]">
-              <label htmlFor="description" className="text-white font-mono mb-1 font-semibold">Description</label>
+            <div className="attribute_div">
+              <label htmlFor="description" className="label_style">Description</label>
               <input type="text" id="description" name="description" className="p-2 rounded-md"></input>
             </div>
 
             {/* note */}
-            <div className="flex flex-col m-2 lg:my-5  lg:w-[70%] w-[90%]">
-              <label htmlFor="note" className="text-white font-mono font-semibold mb-1">Note</label>
+            <div className="attribute_div">
+              <label htmlFor="note" className="label_style">Note</label>
               <textarea
                 id="note"
                 name="note"
@@ -61,8 +61,8 @@ const AddExpenseForm = () => {
             </div>
 
             {/* button */}
-            <div className="flex flex-col m-2 lg:w-[70%] w-[90%]">
-              <button className="bg-slate-300 font-mono font-semibold self-end w-[60px] lg:w-[80px] px-2 py-1  rounded-md hover:bg-slate-400 hover:scale-105">add</button>
+            <div className="attribute_div lg:w-[70%]">
+              <button className="bg-slate-300 font-mono font-semibold self-end w-[60px] lg:w-[80px] px-2 py-1 rounded-md hover:bg-slate-400 hover:scale-105">Add</button>
             </div>
           </fieldset>
         </form>
