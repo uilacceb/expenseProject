@@ -10,7 +10,7 @@ const ToggleMenu = () => {
 
   const MenuContent = () => {
     return (
-      <div className="flex flex-col mt-20 h-screen w-screen">
+      <div className="flex flex-col pt-20 h-screen w-screen">
         {/* link to dashboard */}
         <Link to="/" onClick={() => setToggleHamburger(false)}>
           <div className="toggleMenu-element-div">
@@ -39,7 +39,7 @@ const ToggleMenu = () => {
       </div>
 
       {/* Desktop Menu (always visible) */}
-      <div className="hidden lg:block w-[350px] h-screen bg-[#000000ea]">
+      <div className="hidden lg:block w-[350px] max-h-screen bg-[#000000ea]">
         <MenuContent />
       </div></>
   )

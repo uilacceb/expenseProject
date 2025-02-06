@@ -1,17 +1,16 @@
 import WelcomeUser from "./WelcomeUser";
 import ToggleMenu from "./ToggleMenu";
 
+
 const Dashboard = () => {
 
 
   return (
     <>
-      <div className="flex min-h-screen">
+      <div className="flex">
         <ToggleMenu />
-        <div className="flex flex-col flex-1">
-          <WelcomeUser />
-        </div>
-      </div>
+        <WelcomeUser />
+      </div >
     </>
   )
 }
