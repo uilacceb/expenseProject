@@ -9,7 +9,7 @@ const WelcomeUser = () => {
       <div className="flex flex-col w-full h-screen justify-center items-center relative">
         <HamburgerMenu />
         <div className="h-[30%] flex items-center justify-center">
-          <h1 className="font-mono font-semibold text-3xl pt-4 lg:text-[50px]">Welcome username</h1>
+          <h1 className="font-mono font-semibold text-3xl pt-4 lg:text-[50px] caret-transparent">Welcome username</h1>
         </div>
         <div className="w-full h-full">
           <Balance />
