@@ -12,7 +12,7 @@ const TransactionHistory = () => {
         <div className="bg-[#2B363C] text-white font-mono">
           <table className="table-fixed w-full ">
             <thead className="bg-[#100f0fbf]" >
-              <tr className="border-b-[1px] h-[50px] border-white text-left">
+              <tr className="border-b-[1px] h-[50px] border-white text-left ">
                 <th className="hidden lg:table-cell w-1/12">#</th>
                 <th className="w-1/5 lg:text-left text-center">Date</th>
                 <th className="hidden lg:table-cell w-1/6">Category</th>
@@ -25,16 +25,16 @@ const TransactionHistory = () => {
             </thead>
 
             <tbody>
-              <tr className="odd:bg-[#35424a]">
-                <td className="td_styling td_hidden ">1</td>
+              <tr className="odd:bg-[#35424a] ">
+              <td className="td_styling td_hidden ">1</td>
                 <td className="td_styling">2024-01-01</td>
-                <td className="td_hidden td_styling">Income</td>
-                <td className="td_styling">1000</td>
-                <td className="td_hidden td_styling">costco</td>
+                <td className="td_hidden td_styling">Gas</td>
+                <td className="td_styling">60</td>
+                <td className="td_hidden td_styling">Costco</td>
                 <td className="td_hidden td_styling text-wrap ">This is a very long note</td>
-                <td className="td_hidden" >
+                <td className="td_hidden td_styling" >
                   <div className="flex h-full items-center justify-center">
-                    <button className="bg-blue-400 py-1 px-[4px]  text-white mx-1 font-semibold">edit</button>
+                    <button className="bg-blue-400 py-1 px-[4px] text-white mx-1 font-semibold">edit</button>
                     <button className="bg-red-400 p-1 text-white  mx-1 font-semibold">delete</button>
                   </div>
                 </td>

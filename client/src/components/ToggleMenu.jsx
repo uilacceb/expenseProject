@@ -4,16 +4,38 @@ import { RiHistoryFill } from "react-icons/ri";
 import { useContext } from "react";
 import { ExpenseContext } from "../App";
 import { Link } from "react-router-dom";
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
 
 const ToggleMenu = () => {
   const { toggleHamburger, setToggleHamburger } = useContext(ExpenseContext);
 
+  const handleLoginSuccess = (credentialResponse) => {
+    const decoded = jwtDecode(credentialResponse?.credential);
+    console.log(decoded);
+    // setUser(decoded)
+
+
+
+  }
   const MenuContent = () => {
     return (
-      <div className="flex flex-col pt-20 h-screen w-screen">
+      <div className="flex flex-col h-screen lg:w-[400px] ">
+        <div className="flex justify-end mb-16 pt-6 pr-4 shover:scale-110 duration-150 cursor-pointer caret-transparent">
+          <GoogleLogin
+            onSuccess={handleLoginSuccess}
+            auto_select
+            theme="filled_black"
+            type="standard"
+            size="medium"
+            onError={() => {
+              console.log('Login Failed');
+            }}
+          />
+        </div>
         {/* link to dashboard */}
         <Link to="/" onClick={() => setToggleHamburger(false)}>
-          <div className="toggleMenu-element-div">
+          <div className="toggleMenu-element-div ">
             <RxDashboard color="white" size={24} />
             <p className="text-white font-mono pl-4">Dashboard</p>
           </div>
@@ -39,7 +61,7 @@ const ToggleMenu = () => {
       </div>
 
       {/* Desktop Menu (always visible) */}
-      <div className="hidden lg:block w-[350px] max-h-screen bg-[#000000ea]">
+      <div className="hidden lg:block lg:w-[400px] max-h-screen bg-[#000000ea]">
         <MenuContent />
       </div></>
   )
