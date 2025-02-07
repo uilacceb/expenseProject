@@ -13,7 +13,7 @@
     @apply flex items-center w-auto pl-10 mb-8 text-xl hover:scale-110 duration-150 cursor-pointer lg:hover:scale-110  lg:w-max;
   }
   .td_styling {
-    @apply border-blue-500 border-2 p-1;
+    @apply  p-1 ;
   }
   .td_hidden{
     @apply hidden lg:table-cell
