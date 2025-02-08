@@ -6,6 +6,7 @@ import { ExpenseContext } from "../App";
 import { Link } from "react-router-dom";
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
+import { googleLogout } from '@react-oauth/google';
 
 const ToggleMenu = () => {
   const { toggleHamburger, setToggleHamburger, user, setUser } = useContext(ExpenseContext);
@@ -14,10 +15,14 @@ const ToggleMenu = () => {
     const decoded = jwtDecode(credentialResponse?.credential);
     console.log(decoded);
     setUser(decoded)
-
-
-
   }
+
+  const handleLogout = () => {
+    googleLogout();
+    setUser(null)
+  }
+
+
   const MenuContent = () => {
     return (
       <div className="flex flex-col h-screen lg:w-[400px] ">
@@ -31,7 +36,16 @@ const ToggleMenu = () => {
             onError={() => {
               console.log('Login Failed');
             }}
-          />   </div> : (<div className="flex justify-center mb-16 pt-12 pr-4 text-2xl font-bold caret-transparent"><p className="text-[#fff] font-mono ">Hello {user.given_name}!</p></div>)
+          /></div> : (
+          <>
+            <div className='flex  justify-end pr-6 pt-8'>
+              <img src={user.picture} className="h-6 w-6 rounded-lg" />
+              <button className="text-[#fff] ml-2" onClick={handleLogout}>Log out</button>
+            </div>
+            <div className="flex justify-center mb-16 pt-12 pr-4 text-2xl font-bold caret-transparent"><p className="text-[#fff] font-mono ">Hello {user.given_name}!</p>
+            </div>
+
+          </>)
         }
 
 

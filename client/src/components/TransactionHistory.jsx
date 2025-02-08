@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import HamburgerMenu from "./HamburgerMenu"
 import ToggleMenu from "./ToggleMenu"
 
@@ -26,30 +27,33 @@ const TransactionHistory = () => {
 
             <tbody>
               <tr className="odd:bg-[#35424a] ">
-              <td className="td_styling td_hidden ">1</td>
+                <td className="td_styling td_hidden ">1</td>
                 <td className="td_styling">2024-01-01</td>
                 <td className="td_hidden td_styling">Gas</td>
-                <td className="td_styling">60</td>
+                <td className="td_styling">$60</td>
                 <td className="td_hidden td_styling">Costco</td>
                 <td className="td_hidden td_styling text-wrap ">This is a very long note</td>
                 <td className="td_hidden td_styling" >
                   <div className="flex h-full items-center justify-center">
-                    <button className="bg-blue-400 py-1 px-[4px] text-white mx-1 font-semibold">edit</button>
+                    <Link to="/update-expense">
+                      <button className="bg-blue-400 py-1 px-[4px] text-white mx-1 font-semibold">edit</button></Link>
                     <button className="bg-red-400 p-1 text-white  mx-1 font-semibold">delete</button>
                   </div>
                 </td>
                 {/* For smaller screens, we show a button */}
                 <td className="lg:hidden td_styling">
-                  <div className="flex justify-start">
-                    <button className="bg-slate-200 py-[6px] px-[10px] font-semibold text-black ">view </button>
-                  </div>
+                  <Link to="/expense-detail">
+                    <div className="flex justify-start">
+                      <button className="bg-slate-200 py-[6px] px-[10px] font-semibold text-black ">view </button>
+                    </div>
+                  </Link>
                 </td>
               </tr>
               <tr>
                 <td className="td_styling td_hidden ">2</td>
                 <td className="td_styling">2024-02-01</td>
                 <td className="td_hidden td_styling">Grocery</td>
-                <td className="td_styling">100</td>
+                <td className="td_styling">$100</td>
                 <td className="td_hidden td_styling">food basic</td>
                 <td className="td_hidden td_styling text-wrap ">This is another very long note</td>
                 <td className="td_hidden td_styling" >
@@ -60,9 +64,11 @@ const TransactionHistory = () => {
                 </td>
                 {/* For smaller screens, we show a button */}
                 <td className="lg:hidden td_styling ">
-                  <div className="flex justify-start">
-                    <button className="bg-slate-200 py-[6px] px-[10px] font-semibold text-black ">view </button>
-                  </div>
+                  <Link to="/expense-detail">
+                    <div className="flex justify-start">
+                      <button className="bg-slate-200 py-[6px] px-[10px] font-semibold text-black ">view </button>
+                    </div>
+                  </Link>
                 </td>
               </tr>
             </tbody>

@@ -62,7 +62,7 @@ const AddExpenseForm = () => {
 
             {/* button */}
             <div className="attribute_div lg:w-[70%]">
-              <button className="bg-slate-300 font-mono font-semibold self-end w-[60px] lg:w-[80px] px-2 py-1 rounded-md hover:bg-slate-400 hover:scale-105">Add</button>
+              <button className="bg-slate-300 font-mono font-semibold self-end px-2 py-1 rounded-md hover:bg-slate-400 hover:scale-105">Add</button>
             </div>
           </fieldset>
         </form>
