@@ -8,12 +8,12 @@ import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 
 const ToggleMenu = () => {
-  const { toggleHamburger, setToggleHamburger } = useContext(ExpenseContext);
+  const { toggleHamburger, setToggleHamburger, user, setUser } = useContext(ExpenseContext);
 
   const handleLoginSuccess = (credentialResponse) => {
     const decoded = jwtDecode(credentialResponse?.credential);
     console.log(decoded);
-    // setUser(decoded)
+    setUser(decoded)
 
 
 
@@ -21,7 +21,7 @@ const ToggleMenu = () => {
   const MenuContent = () => {
     return (
       <div className="flex flex-col h-screen lg:w-[400px] ">
-        <div className="flex justify-end mb-16 pt-6 pr-4 shover:scale-110 duration-150 cursor-pointer caret-transparent">
+        {!user ? <div className="flex justify-end mb-16 pt-6 pr-4 shover:scale-110 duration-150 cursor-pointer caret-transparent">
           <GoogleLogin
             onSuccess={handleLoginSuccess}
             auto_select
@@ -31,8 +31,11 @@ const ToggleMenu = () => {
             onError={() => {
               console.log('Login Failed');
             }}
-          />
-        </div>
+          />   </div> : (<div className="flex justify-center mb-16 pt-12 pr-4 text-2xl font-bold caret-transparent"><p className="text-[#fff] font-mono ">Hello {user.given_name}!</p></div>)
+        }
+
+
+
         {/* link to dashboard */}
         <Link to="/" onClick={() => setToggleHamburger(false)}>
           <div className="toggleMenu-element-div ">

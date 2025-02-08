@@ -10,12 +10,13 @@ export const ExpenseContext = createContext();
 
 function App() {
   const [toggleHamburger, setToggleHamburger] = useState(false)
+  const [user, setUser] = useState();
 
 
   return (
     <>
       <Router>
-        <ExpenseContext.Provider value={{ toggleHamburger, setToggleHamburger }}>
+        <ExpenseContext.Provider value={{ toggleHamburger, setToggleHamburger, user, setUser }}>
           <Routes>
             <Route path="/" element={<Layout><Dashboard /></Layout>} />
             <Route path="/add-expense" element={<Layout><AddExpenseForm /></Layout>} />
