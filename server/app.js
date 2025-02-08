@@ -1,7 +1,7 @@
 import express from "express"
 import { connectDB } from "./db.js"
 import dotenv from "dotenv"
-//import cors from 'cors';
+import cors from 'cors';
 import ExpenseRouter from "./routes/expense.route.js";
 dotenv.config()
 
@@ -24,7 +24,7 @@ app.use(
   })
 );
 
-app.use(express.json)
+app.use(express.json())
 app.use(ExpenseRouter)
 
 export default app;

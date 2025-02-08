@@ -11,10 +11,10 @@ const checkUserId = (req, res, next) => {
   }
   next();//This means “okay, we’re done with our check; you can continue to the next step in the middleware chain or route handler.”
 };
-router.post('/api/expense', checkUserId, createExpense)
-router.get('/api/expense', checkUserId, getAllExpense)
-router.get('/api/expense/:id', checkUserId, getExpenseById)
-router.delete('/api/expense/:id', checkUserId, deleteExpense)
-router.put('/api/expense/:id', checkUserId, modifyExpense)
+ExpenseRouter.post('/api/expense', checkUserId, createExpense)
+ExpenseRouter.get('/api/expense', checkUserId, getAllExpense)
+ExpenseRouter.get('/api/expense/:id', checkUserId, getExpenseById)
+ExpenseRouter.delete('/api/expense/:id', checkUserId, deleteExpense)
+ExpenseRouter.put('/api/expense/:id', checkUserId, modifyExpense)
 
 export default ExpenseRouter;
