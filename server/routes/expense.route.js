@@ -1,7 +1,7 @@
 import Router from "express"
 import { createExpense, getAllExpense, deleteExpense, modifyExpense, getExpenseById } from "../controllers/expense.controller.js"
 
-const router = Router();
+const ExpenseRouter = Router();
 
 //middleware of checking userId which can stop the request before it ever hits your controller logic. This can help simplify your controller so it doesn’t have to worry about basic validation
 const checkUserId = (req, res, next) => {
@@ -17,4 +17,4 @@ router.get('/api/expense/:id', checkUserId, getExpenseById)
 router.delete('/api/expense/:id', checkUserId, deleteExpense)
 router.put('/api/expense/:id', checkUserId, modifyExpense)
 
-export default router;
+export default ExpenseRouter;
