@@ -5,9 +5,6 @@ export const createExpense = async (req, res) => {
   try {
     const { date, category, description, amount, note, userId } = req.body;
     console.log(req.body);
-    if (!userId) {
-      return res.status(401).json({ message: "UserId is required, please log in!" })
-    }
     const expense = await Expense.create({ date, category, description, amount, note, userId });
     res.status(200).json(expense);
   } catch (error) {
