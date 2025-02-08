@@ -29,7 +29,7 @@ export const getAllExpense = async (req, res) => {
 export const deleteExpense = async (req, res) => {
   try {
     const userId = req.query.userId;
-    const expenseId = req.params._id;
+    const expenseId = req.params.id;
     const expense = await Expense.findOneAndDelete({ userId: userId, _id: expenseId })
 
     if (!expense) {
@@ -45,7 +45,7 @@ export const deleteExpense = async (req, res) => {
 export const modifyExpense = async (req, res) => {
   try {
     const userId = req.query.id;
-    const expenseId = req.params._id;
+    const expenseId = req.params.id;
     const expense = await Expense.findOneAndUpdate(
       { userId: userId, _id: expenseId },
       req.body,
@@ -63,7 +63,7 @@ export const modifyExpense = async (req, res) => {
 export const getExpenseById = async (req, res) => {
   try {
     const userId = req.query.userId;
-    const expenseId = req.params._id;
+    const expenseId = req.params.id;
     const expense = await Expense.findOne({ userId: userId, _id: expenseId });
     if (!expense) {
       res.status(404).json({ message: "Expense not found!" })
