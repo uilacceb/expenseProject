@@ -75,7 +75,7 @@ const AddExpenseForm = () => {
         <Link to="/transaction-history">
           <button className="bg-red-500 rounded-md p-[2px] absolute top-3 right-4"><RiCloseFill color="white" size={24} /></button>
         </Link>
-        <form className="h-full flex" onSubmit={handleUpdateExpense}>
+        <form className="h-full flex md:p-20" onSubmit={handleUpdateExpense}>
           <fieldset className="flex flex-col items-center lg:w-[500px] w-80 overflow-hidden ">
             {/* date */}
             <div className="attribute_div">

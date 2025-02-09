@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import { ExpenseContext } from "../App"
@@ -11,6 +11,11 @@ const AddExpenseForm = () => {
   const [error, setError] = useState('')
   const navigation = useNavigate();
 
+  useEffect(() => {
+    handleReset();
+  }, []);
+
+
   const handleDateChange = (e) => {
     const selectedDate = new Date(e.target.value)
     const year = selectedDate.getFullYear();
@@ -20,6 +25,8 @@ const AddExpenseForm = () => {
     console.log(formattedDate)
     setDate(formattedDate)
   }
+
+
 
   const handleAddExpense = async (e) => {
     e.preventDefault();
