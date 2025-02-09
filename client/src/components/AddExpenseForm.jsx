@@ -8,7 +8,7 @@ import IsIncomeCheckbox from "./IsIncomeCheckbox";
 
 
 const AddExpenseForm = () => {
-  const { user, date, setDate, category, setCategory, amount, setAmount, description, setDescription, note, setNote } = useContext(ExpenseContext)
+  const { user, date, setDate, category, setCategory, amount, setAmount, description, setDescription, note, setNote, isIncome } = useContext(ExpenseContext)
   const [error, setError] = useState('')
   const navigation = useNavigate();
 
@@ -56,14 +56,24 @@ const AddExpenseForm = () => {
       return
     }
 
+    let amountNew = amount;
+    if (!isIncome) {
+      amountNew = amount * -1
+
+    } else {
+      amountNew = amount * 1
+    }
+
+
+
     let defaultCategory = category
     if (!defaultCategory) {
       defaultCategory = "Grocery"
       setCategory(defaultCategory)
     }
-    console.log({ currentDate, defaultCategory, description, amount, note })
+    console.log({ currentDate, defaultCategory, description, amountNew, note })
     try {
-      const data = await creatingExpense(currentDate, defaultCategory, description, amount, note, user.sub)
+      const data = await creatingExpense(currentDate, defaultCategory, description, amountNew, note, user.sub)
       setError("")
       navigation("/transaction-history")
       console.log(`expense created successfully: ${data}`);

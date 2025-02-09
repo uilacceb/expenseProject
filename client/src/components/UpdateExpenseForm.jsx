@@ -7,7 +7,7 @@ import IsIncomeCheckbox from "./IsIncomeCheckbox";
 ;
 
 const AddExpenseForm = () => {
-  const { date, setDate, category, setCategory, description, setDescription, amount, setAmount, note, setNote, user } = useContext(ExpenseContext)
+  const { date, setDate, category, setCategory, description, setDescription, amount, setAmount, note, setNote, user, isIncome } = useContext(ExpenseContext)
   const [error, setError] = useState("");
   const navigate = useNavigate()
   const { id } = useParams()
@@ -60,9 +60,9 @@ const AddExpenseForm = () => {
       setError("Please enter a valid number for amount")
       return
     }
-
+    let amountNew = isIncome ? Math.abs(amount) : -Math.abs(amount);
     try {
-      await modifyingExpense(id, currentDate, category, description, amount, note, user.sub);
+      await modifyingExpense(id, currentDate, category, description, amountNew, note, user.sub);
       navigate('/transaction-history');
     } catch (error) {
       console.error('Update failed:', error);
@@ -121,7 +121,7 @@ const AddExpenseForm = () => {
                 name="amount"
                 className="p-2 rounded-md"
                 onChange={(e) => setAmount(e.target.value)}
-                value={amount}></input>
+                value={Math.abs(amount)}></input>
             </div>
 
             {/* description */}
