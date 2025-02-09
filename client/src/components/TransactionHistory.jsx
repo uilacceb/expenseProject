@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom"
 import HamburgerMenu from "./HamburgerMenu"
 import ToggleMenu from "./ToggleMenu"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { ExpenseContext } from "../App"
-import { gettingAllExpense } from "../services/expenseService"
+import { deletingExpense, gettingAllExpense } from "../services/expenseService"
 
 
 
 const TransactionHistory = () => {
   const { expenseList, setExpenseList, user } = useContext(ExpenseContext)
+  const [toggleRefresh, setToggleRefresh] = useState(0)
+
   useEffect(() => {
     const fetchExpense = async () => {
       try {
@@ -19,7 +21,16 @@ const TransactionHistory = () => {
       }
     }
     fetchExpense()
-  })
+  }, [toggleRefresh])
+
+  const handleDelete = async (id, userId) => {
+    try {
+      await deletingExpense(id, userId);
+      setToggleRefresh(prev => prev + 1) //to trigger a re-fetch
+    } catch (error) {
+      console.error("failed to delete expense: ", error)
+    }
+  }
 
   return (
     <div className="flex min-h-screen ">
@@ -47,14 +58,16 @@ const TransactionHistory = () => {
                   <td className="td_styling td_hidden ">{index + 1}</td>
                   <td className="td_styling">{expense.date}</td>
                   <td className="td_hidden td_styling">{expense.category}</td>
-                  <td className="td_styling">{expense.amount}</td>
+                  <td className="td_styling">${expense.amount}</td>
                   <td className="td_hidden td_styling">{expense.description}</td>
                   <td className="td_hidden td_styling text-wrap ">{expense.note}</td>
                   <td className="td_hidden td_styling" >
-                    <div className="flex h-full items-center justify-center">
+                    <div className="flex h-full items-center justify-start">
                       <Link to="/update-expense">
                         <button className="bg-blue-400 py-1 px-[4px] text-white mx-1 font-semibold">edit</button></Link>
-                      <button className="bg-red-400 p-1 text-white  mx-1 font-semibold">delete</button>
+                      <button
+                        className="bg-red-400 p-1 text-white  mx-1 font-semibold"
+                        onClick={() => handleDelete(expense._id, expense.userId)}>delete</button>
                     </div>
                   </td>
                   {/* For smaller screens, we show a button */}
