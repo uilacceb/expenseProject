@@ -3,6 +3,7 @@ import { RiCloseFill } from "react-icons/ri";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ExpenseContext } from "../App";
 import { gettingExpenseById, modifyingExpense } from "../services/expenseService";
+import IsIncomeCheckbox from "./IsIncomeCheckbox";
 ;
 
 const AddExpenseForm = () => {
@@ -113,7 +114,7 @@ const AddExpenseForm = () => {
 
             {/* amount */}
             <div className="attribute_div">
-              <label htmlFor="amount" className="label_style">Amount</label>
+              <label htmlFor="amount" className="label_style flex justify-between">Amount<IsIncomeCheckbox /></label>
               <input
                 type="text"
                 id="amount"
