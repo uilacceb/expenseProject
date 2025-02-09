@@ -2,13 +2,22 @@ import { useContext, useEffect } from "react";
 import { RiCloseFill } from "react-icons/ri"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { ExpenseContext } from "../App";
-import { gettingExpenseById } from "../services/expenseService";
+import { deletingExpense, gettingExpenseById } from "../services/expenseService";
 
 
 const ExpenseDetailMobile = () => {
   const { date, setDate, category, setCategory, description, setDescription, amount, setAmount, note, setNote, user } = useContext(ExpenseContext)
   const navigate = useNavigate();
   const { id } = useParams();
+
+  const handleDelete = async (id, userId) => {
+    try {
+      await deletingExpense(id, userId);
+      navigate('/transaction-history')
+    } catch (error) {
+      console.error("failed to delete expense: ", error)
+    }
+  }
 
 
   useEffect(() => {
@@ -56,7 +65,10 @@ const ExpenseDetailMobile = () => {
           </div>
         </div>
         <div className="w-full text-right mb-2 mr-2">
-          <button className="font-mono rounded-md text-white bg-[#e73c3c] font-semibold px-2 py-1 mr-3">delete</button>
+          <button
+            className="font-mono rounded-md text-white bg-[#e73c3c] font-semibold px-2 py-1 mr-3"
+            onClick={() => handleDelete(id, user.sub)}
+          >delete</button>
           <button
             className="font-mono rounded-md  text-white bg-[#2a65a0] font-semibold px-2 py-1"
             onClick={() => navigate(`/update-expense/${id}`)}
