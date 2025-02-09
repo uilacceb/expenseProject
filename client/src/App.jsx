@@ -19,21 +19,22 @@ function App() {
   const [description, setDescription] = useState('');
   const [note, setNote] = useState('');
   const [expenseList, setExpenseList] = useState([])
+  const [isIncome, setIsIncome] = useState(false)
 
   return (
     <>
       <Router>
-        <ExpenseContext.Provider value={{ toggleHamburger, setToggleHamburger, user, setUser, date, setDate, category, setCategory, amount, setAmount, description, setDescription, note, setNote, expenseList, setExpenseList }}>
-          <Routes>
-            <Route path="/" element={<Layout><Dashboard /></Layout>} />
-            <Route path="/add-expense" element={<Layout><AddExpenseForm /></Layout>} />
-            <Route path="/update-expense/:id" element={<Layout><UpdateExpenseForm /></Layout>} />
-            <Route path="/transaction-history" element={<Layout><TransactionHistory /></Layout>} />
-            <Route path="/expense-detail/:id" element={<Layout><ExpenseDetailMobile /></Layout>} />
-          </Routes>
+        <ExpenseContext.Provider value={{ toggleHamburger, setToggleHamburger, user, setUser, date, setDate, category, setCategory, amount, setAmount, description, setDescription, note, setNote, expenseList, setExpenseList, isIncome, setIsIncome }}>
+        <Routes>
+          <Route path="/" element={<Layout><Dashboard /></Layout>} />
+          <Route path="/add-expense" element={<Layout><AddExpenseForm /></Layout>} />
+          <Route path="/update-expense/:id" element={<Layout><UpdateExpenseForm /></Layout>} />
+          <Route path="/transaction-history" element={<Layout><TransactionHistory /></Layout>} />
+          <Route path="/expense-detail/:id" element={<Layout><ExpenseDetailMobile /></Layout>} />
+        </Routes>
 
-        </ExpenseContext.Provider>
-      </Router >
+      </ExpenseContext.Provider>
+    </Router >
     </>
   )
 }
