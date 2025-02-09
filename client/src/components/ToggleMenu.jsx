@@ -1,15 +1,25 @@
 import { TbMenu2 } from "react-icons/tb";
 import { RxDashboard } from "react-icons/rx";
 import { RiHistoryFill } from "react-icons/ri";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ExpenseContext } from "../App";
 import { Link } from "react-router-dom";
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import { googleLogout } from '@react-oauth/google';
+import { gettingAllExpense } from "../services/expenseService";
 
 const ToggleMenu = () => {
-  const { toggleHamburger, setToggleHamburger, user, setUser } = useContext(ExpenseContext);
+  const { toggleHamburger, setToggleHamburger, user, setUser, setExpenseList } = useContext(ExpenseContext);
+
+  useEffect(() => {
+    if (!user) return;
+    const fetchAllExpense = async () => {
+      const allExpense = await gettingAllExpense(user.sub)
+      setExpenseList(allExpense)
+    }
+    fetchAllExpense();
+  }, [user])
 
   const handleLoginSuccess = (credentialResponse) => {
     const decoded = jwtDecode(credentialResponse?.credential);
