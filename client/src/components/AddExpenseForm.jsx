@@ -1,14 +1,16 @@
 import { useContext, useState } from "react";
-import { RiCloseFill } from "react-icons/ri"; import { Link } from "react-router-dom";
+import { RiCloseFill } from "react-icons/ri";
+import { Link, useNavigate } from "react-router-dom";
 import { ExpenseContext } from "../App"
 import { creatingExpense } from "../services/expenseService";
+
 
 
 const AddExpenseForm = () => {
   const { user, date, setDate, category, setCategory, amount, setAmount, description, setDescription, note, setNote } = useContext(ExpenseContext)
   const [error, setError] = useState('')
+  const navigation = useNavigate();
 
-  
   const handleDateChange = (e) => {
     const selectedDate = new Date(e.target.value)
     const year = selectedDate.getFullYear();
@@ -23,7 +25,7 @@ const AddExpenseForm = () => {
     e.preventDefault();
 
     if (!user) {
-      setError("Please log in to add expenses");
+      setError("Please log in to add expenses!");
       return;
     }
     if (!amount) {
@@ -42,7 +44,7 @@ const AddExpenseForm = () => {
     }
 
     if (!Number(amount)) {
-      setError("Please enter a value number for amount")
+      setError("Please enter a value number for amount!")
       return
     }
 
@@ -55,29 +57,30 @@ const AddExpenseForm = () => {
     try {
       const data = await creatingExpense(currentDate, defaultCategory, description, amount, note, user.sub)
       setError("")
+      navigation("/transaction-history")
       console.log(`expense created successfully: ${data}`);
+      handleReset();
     } catch (error) {
       console.log('created failed: ', error.message);
     }
-    console.log("creatingExpense about to return something...");
   }
 
-  // const handleReset = () => {
-  //   setDate("")
-  //   setCategory("")
-  //   setAmount(0);
-  //   setDescription("")
-  //   setNote("")
-  // }
+  const handleReset = () => {
+    setDate("")
+    setCategory("")
+    setAmount(0);
+    setDescription("")
+    setNote("")
+  }
 
   return (
     <div className="w-full h-full flex justify-center items-center">
-      <div className="bg-[#2B363C] p-4 rounded-md w-[90%] h-[90%] lg:w-[750px] lg:text-2xl flex justify-center items-center relative ">
+      <div className="bg-[#2B363C] p-4 rounded-md w-[90%] h-[95%] lg:w-[750px] lg:text-2xl flex justify-center items-center relative ">
         {/* close button */}
         <Link to="/">
           <button className="bg-red-500 rounded-md p-[2px] absolute top-3 right-4"><RiCloseFill color="white" size={24} /></button>
         </Link>
-        <form className="h-full flex">
+        <form className="h-full flex" onSubmit={handleAddExpense}>
           <fieldset className="flex flex-col items-center lg:w-[500px] w-80 overflow-hidden ">
             {/* date */}
             <div className="attribute_div">
@@ -151,15 +154,13 @@ const AddExpenseForm = () => {
                 value={note}
               ></textarea>
             </div>
-            {error && <div className="text-red-500">{error}</div>}
+            {error && <p className="text-red-500">{error}</p>}
             {/* button */}
             <div className="attribute_div lg:w-[70%] text-right">
-              <Link to="/transaction-history">
-                <button
-                  className="bg-slate-300 font-mono font-semibold self-end px-2 py-1 rounded-md hover:bg-slate-400 hover:scale-105"
-                  onClick={handleAddExpense}
-                >Add</button>
-              </Link>
+              <button
+                className="bg-slate-300 font-mono font-semibold self-end px-2 py-1 rounded-md hover:bg-slate-400 hover:scale-105"
+
+              >Add</button>
             </div>
           </fieldset>
         </form>

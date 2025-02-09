@@ -29,14 +29,15 @@ const ToggleMenu = () => {
         {!user ? <div className="flex justify-end mb-16 pt-6 pr-4 shover:scale-110 duration-150 cursor-pointer caret-transparent">
           <GoogleLogin
             onSuccess={handleLoginSuccess}
-            auto_select
+            auto_select={true}
             theme="filled_black"
             type="standard"
             size="medium"
             onError={() => {
               console.log('Login Failed');
             }}
-          /></div> : (
+          />
+        </div> : (
           <>
             <div className='flex  justify-end pr-6 pt-8'>
               <img src={user.picture} className="h-6 w-6 rounded-lg" />
