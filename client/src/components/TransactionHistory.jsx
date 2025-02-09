@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react"
 import { ExpenseContext } from "../App"
 import { deletingExpense, gettingAllExpense } from "../services/expenseService"
 import { FaPlus } from "react-icons/fa6"
+import { FiRefreshCcw } from "react-icons/fi";
 
 
 
@@ -86,6 +87,13 @@ const TransactionHistory = () => {
                 <td className="text-center p-2 font-mono font-semibold lg:text-[1.5vw]" colSpan="8">No expense found</td></tr>)}
             </tbody>
           </table>
+        </div>
+        <div className="flex justify-end pt-2 pr-2">
+          <FiRefreshCcw
+            size={26}
+            color="#5C5C5C"
+            className=" hover:scale-110 transition-transform cursor-pointer duration-200"
+            onClick={() => setToggleRefresh(prev => prev + 1)} />
         </div>
         {/* add expense button */}
         <div className="text-right absolute bottom-2 right-2">
