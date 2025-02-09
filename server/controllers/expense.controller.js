@@ -44,14 +44,14 @@ export const deleteExpense = async (req, res) => {
 //modify an expense
 export const modifyExpense = async (req, res) => {
   try {
-    const userId = req.query.id;
+    const userId = req.query.userId;
     const expenseId = req.params.id;
     const expense = await Expense.findOneAndUpdate(
       { userId: userId, _id: expenseId },
       req.body,
       { new: true })
     if (!expense) {
-      res.status(404).json({ message: "Expense not found" });
+      return res.status(404).json({ message: "Expense not found" });
     }
     res.status(200).json(expense);
   } catch (error) {

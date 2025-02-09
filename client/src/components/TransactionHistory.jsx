@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import HamburgerMenu from "./HamburgerMenu"
 import ToggleMenu from "./ToggleMenu"
 import { useContext, useEffect, useState } from "react"
@@ -10,6 +10,7 @@ import { deletingExpense, gettingAllExpense } from "../services/expenseService"
 const TransactionHistory = () => {
   const { expenseList, setExpenseList, user } = useContext(ExpenseContext)
   const [toggleRefresh, setToggleRefresh] = useState(0)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchExpense = async () => {
@@ -63,8 +64,9 @@ const TransactionHistory = () => {
                   <td className="td_hidden td_styling text-wrap ">{expense.note}</td>
                   <td className="td_hidden td_styling" >
                     <div className="flex h-full items-center justify-start">
-                      <Link to="/update-expense">
-                        <button className="bg-blue-400 py-1 px-[4px] text-white mx-1 font-semibold">edit</button></Link>
+                      <button
+                        className="bg-blue-400 py-1 px-[4px] text-white mx-1 font-semibold"
+                        onClick={() => navigate(`/update-expense/${expense._id}`)}>edit</button>
                       <button
                         className="bg-red-400 p-1 text-white  mx-1 font-semibold"
                         onClick={() => handleDelete(expense._id, expense.userId)}>delete</button>

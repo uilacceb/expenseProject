@@ -27,7 +27,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout><Dashboard /></Layout>} />
             <Route path="/add-expense" element={<Layout><AddExpenseForm /></Layout>} />
-            <Route path="/update-expense" element={<Layout><UpdateExpenseForm /></Layout>} />
+            <Route path="/update-expense/:id" element={<Layout><UpdateExpenseForm /></Layout>} />
             <Route path="/transaction-history" element={<Layout><TransactionHistory /></Layout>} />
             <Route path="/expense-detail" element={<Layout><ExpenseDetailMobile /></Layout>} />
           </Routes>

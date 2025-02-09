@@ -7,7 +7,7 @@ const ExpenseRouter = Router();
 const checkUserId = (req, res, next) => {
   const userId = req.body.userId || req.query.userId;
   if (!userId) {
-    res.status(401).json({ message: "User Id us required, please log in!" })
+    return res.status(401).json({ message: "User Id us required, please log in!" })
   }
   next();//This means “okay, we’re done with our check; you can continue to the next step in the middleware chain or route handler.”
 };
