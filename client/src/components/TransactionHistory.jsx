@@ -1,9 +1,10 @@
-import {  useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import HamburgerMenu from "./HamburgerMenu"
 import ToggleMenu from "./ToggleMenu"
 import { useContext, useEffect, useState } from "react"
 import { ExpenseContext } from "../App"
 import { deletingExpense, gettingAllExpense } from "../services/expenseService"
+import { FaPlus } from "react-icons/fa6"
 
 
 
@@ -34,7 +35,7 @@ const TransactionHistory = () => {
   }
 
   return (
-    <div className="flex min-h-screen ">
+    <div className="flex min-h-screen  ">
       <ToggleMenu />
       <div className="flex flex-col flex-1  p-4">
         <HamburgerMenu />
@@ -85,7 +86,14 @@ const TransactionHistory = () => {
                 <td className="text-center p-2 font-mono font-semibold lg:text-[1.5vw]" colSpan="8">No expense found</td></tr>)}
             </tbody>
           </table>
-
+        </div>
+        {/* add expense button */}
+        <div className="text-right absolute bottom-2 right-2">
+          <Link to="/add-expense">
+            <button className="bg-[#000000cb] text-white p-2 rounded-full shadow-md hover:scale-110 duration-150 hover:bg-[#000000b9]">
+              <FaPlus size={50} />
+            </button>
+          </Link>
         </div>
       </div>
     </div>

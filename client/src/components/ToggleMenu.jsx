@@ -35,7 +35,7 @@ const ToggleMenu = () => {
 
   const MenuContent = () => {
     return (
-      <div className="flex flex-col h-screen lg:w-[400px] ">
+      <div className="flex flex-col h-screen lg:w-[400px]  caret-transparent">
         {!user ? <div className="flex justify-end mb-16 pt-6 pr-4 shover:scale-110 duration-150 cursor-pointer caret-transparent">
           <GoogleLogin
             onSuccess={handleLoginSuccess}
