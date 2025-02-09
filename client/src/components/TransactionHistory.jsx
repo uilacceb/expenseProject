@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
 import HamburgerMenu from "./HamburgerMenu"
 import ToggleMenu from "./ToggleMenu"
 import { useContext, useEffect, useState } from "react"
@@ -74,11 +74,11 @@ const TransactionHistory = () => {
                   </td>
                   {/* For smaller screens, we show a button */}
                   <td className="lg:hidden td_styling">
-                    <Link to="/expense-detail">
-                      <div className="flex justify-start">
-                        <button className="bg-slate-200 py-[6px] px-[10px] font-semibold text-black ">view</button>
-                      </div>
-                    </Link>
+                    <div className="flex justify-start">
+                      <button
+                        className="bg-slate-200 py-[6px] px-[10px] font-semibold text-black"
+                        onClick={() => navigate(`/expense-detail/${expense._id}`)}>view</button>
+                    </div>
                   </td>
                 </tr></>)
               })) : (<tr className="odd:bg-[#35424a]" >
