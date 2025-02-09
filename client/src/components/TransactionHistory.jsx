@@ -15,6 +15,10 @@ const TransactionHistory = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
+    if (!user) {
+      setExpenseList('')
+      return;
+    }
     const fetchExpense = async () => {
       try {
         const allExpense = await gettingAllExpense(user.sub);
@@ -24,7 +28,7 @@ const TransactionHistory = () => {
       }
     }
     fetchExpense()
-  }, [toggleRefresh])
+  }, [toggleRefresh, user])
 
   const handleDelete = async (id, userId) => {
     try {
