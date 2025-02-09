@@ -27,9 +27,9 @@ const TransactionHistory = () => {
       <div className="flex flex-col flex-1  p-4">
         <HamburgerMenu />
         <div className="bg-[#2B363C] text-white font-mono">
-          <table className="table-fixed w-full ">
+          <table className="lg:table-fixed w-full ">
             <thead className="bg-[#100f0fbf]" >
-              <tr className="border-b-[1px] h-[50px] border-white text-left ">
+              <tr className=" h-[50px] text-left ">
                 <th className="hidden lg:table-cell w-1/12">#</th>
                 <th className="w-1/5 lg:text-left text-center">Date</th>
                 <th className="hidden lg:table-cell w-1/6">Category</th>
@@ -42,7 +42,7 @@ const TransactionHistory = () => {
             </thead>
 
             <tbody>
-              {expenseList.map((expense, index) => {
+              {expenseList.length > 0 ? (expenseList.map((expense, index) => {
                 return (<><tr className="odd:bg-[#35424a] ">
                   <td className="td_styling td_hidden ">{index + 1}</td>
                   <td className="td_styling">{expense.date}</td>
@@ -66,7 +66,8 @@ const TransactionHistory = () => {
                     </Link>
                   </td>
                 </tr></>)
-              })}
+              })) : (<tr className="odd:bg-[#35424a]" >
+                <td className="text-center p-2 font-mono font-semibold lg:text-[1.5vw]" colSpan="8">No expense found</td></tr>)}
             </tbody>
           </table>
 
