@@ -7,7 +7,7 @@ import IsIncomeCheckbox from "./IsIncomeCheckbox";
 ;
 
 const AddExpenseForm = () => {
-  const { date, setDate, category, setCategory, description, setDescription, amount, setAmount, note, setNote, user, isIncome } = useContext(ExpenseContext)
+  const { date, setDate, category, setCategory, description, setDescription, amount, setAmount, note, setNote, user, isIncome, setIsIncome } = useContext(ExpenseContext)
   const [error, setError] = useState("");
   const navigate = useNavigate()
   const { id } = useParams()
@@ -22,6 +22,7 @@ const AddExpenseForm = () => {
           setDescription(expense.description)
           setAmount(expense.amount)
           setNote(expense.note)
+          setIsIncome(expense.amount > 0);
         }
 
       } catch (error) {
@@ -32,11 +33,12 @@ const AddExpenseForm = () => {
   }, [])
 
   const handleDateChange = (e) => {
-    const selectedDate = new Date(e.target.value);
-    const year = selectedDate.getFullYear();
-    const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
-    const day = String(selectedDate.getDate()).padStart(2, '0');
-    const formattedDate = `${year}-${month}-${day}`;
+    const selectedDate = new Date(e.target.value)
+    const year = selectedDate.getUTCFullYear();
+    const month = String(selectedDate.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const day = String(selectedDate.getUTCDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`
+    console.log(formattedDate)
     setDate(formattedDate)
   }
 
@@ -101,6 +103,8 @@ const AddExpenseForm = () => {
                 <option value="Grocery">Grocery</option>
                 <option value="Income">Income</option>
                 <option value="Travel">Travel</option>
+                <option value="Drinks">Drinks</option>
+                <option value="Dessert">Dessert</option>
                 <option value="Gas">Gas</option>
                 <option value="Restaurant">Restaurant</option>
                 <option value="Pet">Pet</option>

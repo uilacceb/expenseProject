@@ -15,7 +15,7 @@ const Balance = () => {
       }, 0))
     }
     calculateBalance()
-  }, [user])
+  }, [user, expenseList])
 
 
 

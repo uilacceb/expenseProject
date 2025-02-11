@@ -65,7 +65,7 @@ const TransactionHistory = () => {
                   <td className="td_styling td_hidden ">{index + 1}</td>
                   <td className="td_styling">{expense.date}</td>
                   <td className="td_hidden td_styling">{expense.category}</td>
-                  <td className="td_styling">${expense.amount}</td>
+                  <td style={{ color: expense.amount > 0 ? '#22c55e' : '#ef4444' }} className="td_styling">${(expense.amount).toFixed(2)}</td>
                   <td className="td_hidden td_styling">{expense.description}</td>
                   <td className="td_hidden td_styling text-wrap ">{expense.note}</td>
                   <td className="td_hidden td_styling" >
