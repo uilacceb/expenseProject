@@ -9,6 +9,7 @@ import IsIncomeCheckbox from "./IsIncomeCheckbox";
 const AddExpenseForm = () => {
   const { date, setDate, category, setCategory, description, setDescription, amount, setAmount, note, setNote, user, isIncome, setIsIncome } = useContext(ExpenseContext)
   const [error, setError] = useState("");
+
   const navigate = useNavigate()
   const { id } = useParams()
 

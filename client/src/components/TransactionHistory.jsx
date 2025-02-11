@@ -14,6 +14,35 @@ const TransactionHistory = () => {
   const [toggleRefresh, setToggleRefresh] = useState(0)
   const navigate = useNavigate()
 
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pageSize, setPageSize] = useState(15); // items per page
+  const indexOfLastExpense = currentPage * pageSize;
+  const indexOfFirstExpense = indexOfLastExpense - pageSize;
+  const currentExpenses = expenseList.slice(indexOfFirstExpense, indexOfLastExpense);
+  const totalPages = Math.ceil(expenseList.length / pageSize);
+
+  const handlePageChange = (newPage) => {
+    if (newPage < 1 || newPage > totalPages) return;
+    setCurrentPage(newPage);
+  };
+  useEffect(() => {
+    const updatePageSize = () => {
+      if (window.innerWidth < 768) {
+        setPageSize(11); // Mobile: 10 items per page
+      } else {
+        setPageSize(15); // Desktop: 15 items per page
+      }
+    };
+
+    updatePageSize(); // Set on first render
+    window.addEventListener("resize", updatePageSize); // Listen for screen changes
+
+    return () => {
+      window.removeEventListener("resize", updatePageSize); // Cleanup on unmount
+    };
+  }, []);
+
+
   useEffect(() => {
     if (!user) {
       setExpenseList('')
@@ -40,9 +69,9 @@ const TransactionHistory = () => {
   }
 
   return (
-    <div className="flex min-h-screen  ">
+    <div className="flex min-h-screen">
       <ToggleMenu />
-      <div className="flex flex-col flex-1  p-4">
+      <div className="flex flex-col flex-1 p-4 relative">
         <HamburgerMenu />
         <div className="bg-[#2B363C] text-white font-mono">
           <table className="lg:table-fixed w-full ">
@@ -60,7 +89,7 @@ const TransactionHistory = () => {
             </thead>
 
             <tbody>
-              {expenseList.length > 0 ? (expenseList.map((expense, index) => {
+              {currentExpenses.length > 0 ? (currentExpenses.map((expense, index) => {
                 return (<><tr className="odd:bg-[#35424a] ">
                   <td className="td_styling td_hidden ">{index + 1}</td>
                   <td className="td_styling">{expense.date}</td>
@@ -107,6 +136,25 @@ const TransactionHistory = () => {
             </button>
           </Link>
         </div>
+        {/* pagination */}
+        <div className="font-semibold flex justify-center absolute left-1/2 lg:bottom-20 bottom-14 pr-10 -translate-x-1/2 p-2 rounded-md w-screen items-center lg:w-[50%] caret-transparent">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="lg:px-4 py-1 text-black rounded-md disabled:opacity-50 "
+          >
+            Previous
+          </button>
+          <span className="px-4"> Page {currentPage} of {totalPages}</span>
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="lg:px-4  py-1 text-black rounded-md disabled:opacity-50"
+          >
+            Next
+          </button>
+        </div>
+
       </div>
     </div>
   )
