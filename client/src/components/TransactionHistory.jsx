@@ -6,6 +6,7 @@ import { ExpenseContext } from "../App"
 import { deletingExpense, gettingAllExpense } from "../services/expenseService"
 import { FaPlus } from "react-icons/fa6"
 import { FiRefreshCcw } from "react-icons/fi";
+import { FaSort } from "react-icons/fa";
 
 
 
@@ -78,9 +79,19 @@ const TransactionHistory = () => {
             <thead className="bg-[#100f0fbf]" >
               <tr className=" h-[50px] text-left ">
                 <th className="hidden lg:table-cell w-1/12">#</th>
-                <th className="w-1/5 lg:text-left text-center">Date</th>
+                <th className="w-1/5 lg:text-left text-center">
+                  <div className="flex items-center justify-between pr-6 ">
+                    Date
+                    <FaSort className="cursor-pointer" />
+                  </div>
+                </th>
                 <th className="hidden lg:table-cell w-1/6">Category</th>
-                <th className="w-1/6">Amount</th>
+                <th className="w-1/6 caret-transparent">
+                  <div className="flex items-center justify-between pr-6 ">
+                    Amount
+                    <FaSort className="cursor-pointer" />
+                  </div>
+                </th>
                 <th className="hidden lg:table-cell w-1/6">Description</th>
                 <th className="hidden lg:table-cell w-1/6">Note</th>
                 <th className="hidden lg:table-cell w-1/6">Action</th>
