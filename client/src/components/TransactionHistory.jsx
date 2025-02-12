@@ -22,14 +22,32 @@ const TransactionHistory = () => {
   const currentExpenses = expenseList.slice(indexOfFirstExpense, indexOfLastExpense);
   const totalPages = Math.ceil(expenseList.length / pageSize);
 
+  const [sortAmount, setSortAmount] = useState("default")
+
+  const handleSortAmount = () => {
+    let sortedExpense;
+
+    if (sortAmount === "default" || sortAmount === "des") {
+      sortedExpense = [...expenseList].sort((a, b) => a.amount - b.amount);
+      setSortAmount("asc");
+    } else if (sortAmount === "asc") {
+      sortedExpense = [...expenseList].sort((a, b) => b.amount - a.amount);
+      setSortAmount("des");
+    }
+
+    setExpenseList(sortedExpense); // Update state with sorted list
+  }
+
+
   const handlePageChange = (newPage) => {
     if (newPage < 1 || newPage > totalPages) return;
     setCurrentPage(newPage);
   };
+
   useEffect(() => {
     const updatePageSize = () => {
       if (window.innerWidth < 768) {
-        setPageSize(11); // Mobile: 10 items per page
+        setPageSize(11); // Mobile: 11 items per page
       } else {
         setPageSize(15); // Desktop: 15 items per page
       }
@@ -69,6 +87,7 @@ const TransactionHistory = () => {
     }
   }
 
+
   return (
     <div className="flex min-h-screen">
       <ToggleMenu />
@@ -79,8 +98,8 @@ const TransactionHistory = () => {
             <thead className="bg-[#100f0fbf]" >
               <tr className=" h-[50px] text-left ">
                 <th className="hidden lg:table-cell w-1/12">#</th>
-                <th className="w-1/5 lg:text-left text-center">
-                  <div className="flex items-center justify-between pr-6 ">
+                <th className="w-1/5 lg:text-left text-center caret-transparent">
+                  <div className="flex items-center lg:justify-between justify-center lg:pr-6 pl-5 ">
                     Date
                     <FaSort className="cursor-pointer" />
                   </div>
@@ -89,7 +108,7 @@ const TransactionHistory = () => {
                 <th className="w-1/6 caret-transparent">
                   <div className="flex items-center justify-between pr-6 ">
                     Amount
-                    <FaSort className="cursor-pointer" />
+                    <FaSort className="cursor-pointer" onClick={handleSortAmount} />
                   </div>
                 </th>
                 <th className="hidden lg:table-cell w-1/6">Description</th>
