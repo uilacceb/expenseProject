@@ -22,21 +22,34 @@ const TransactionHistory = () => {
   const currentExpenses = expenseList.slice(indexOfFirstExpense, indexOfLastExpense);
   const totalPages = Math.ceil(expenseList.length / pageSize);
 
-  const [sortAmount, setSortAmount] = useState("default")
+  const [sort, setSort] = useState("default")
 
+
+  // handle amount sort
   const handleSortAmount = () => {
     let sortedExpense;
-
-    if (sortAmount === "default" || sortAmount === "des") {
+    if (sort === "default" || sort === "des") {
       sortedExpense = [...expenseList].sort((a, b) => a.amount - b.amount);
-      setSortAmount("asc");
-    } else if (sortAmount === "asc") {
+      setSort("asc");
+    } else if (sort === "asc") {
       sortedExpense = [...expenseList].sort((a, b) => b.amount - a.amount);
-      setSortAmount("des");
+      setSort("des");
     }
-
     setExpenseList(sortedExpense); // Update state with sorted list
   }
+
+  // handle date sort
+  const handleSortDate = () => {
+    let sortedExpense;
+    if (sort === "default" || sort === "des") {
+      sortedExpense = [...expenseList].sort((a, b) => new Date(a.date) - new Date(b.date)); // Oldest to newest
+      setSort("asc");
+    } else if (sort === "asc") {
+      sortedExpense = [...expenseList].sort((a, b) => new Date(b.date) - new Date(a.date)); // Newest to oldest
+      setSort("des");
+    }
+    setExpenseList(sortedExpense); // Update state with sorted list
+  };
 
 
   const handlePageChange = (newPage) => {
@@ -101,7 +114,7 @@ const TransactionHistory = () => {
                 <th className="w-1/5 lg:text-left text-center caret-transparent">
                   <div className="flex items-center lg:justify-between justify-center lg:pr-6 pl-5 ">
                     Date
-                    <FaSort className="cursor-pointer" />
+                    <FaSort className="cursor-pointer" onClick={handleSortDate} />
                   </div>
                 </th>
                 <th className="hidden lg:table-cell w-1/6">Category</th>
