@@ -6,7 +6,7 @@ import { gettingExpenseById, modifyingExpense } from "../services/expenseService
 import IsIncomeCheckbox from "./IsIncomeCheckbox";
 ;
 
-const AddExpenseForm = () => {
+const UpdateExpenseForm = () => {
   const { date, setDate, category, setCategory, description, setDescription, amount, setAmount, note, setNote, user, isIncome, setIsIncome } = useContext(ExpenseContext)
   const [error, setError] = useState("");
 
@@ -166,4 +166,4 @@ const AddExpenseForm = () => {
   )
 }
 
-export default AddExpenseForm
+export default UpdateExpenseForm

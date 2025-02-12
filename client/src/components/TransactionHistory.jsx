@@ -7,6 +7,9 @@ import { deletingExpense, gettingAllExpense } from "../services/expenseService"
 import { FaPlus } from "react-icons/fa6"
 import { FiRefreshCcw } from "react-icons/fi";
 import { FaSort } from "react-icons/fa";
+import { FaSortAlphaDown } from "react-icons/fa";
+import { FaSortAlphaDownAlt } from "react-icons/fa";
+
 
 
 
@@ -50,6 +53,27 @@ const TransactionHistory = () => {
     }
     setExpenseList(sortedExpense); // Update state with sorted list
   };
+
+  //handle category sort
+  // Uses localeCompare() – Ensures proper alphabetical sorting.
+  // Uses Functional setSort() – Prevents state update delays.
+  const handleSortCategory = () => {
+    setSort((prevSort) => {
+      let sortedExpense;
+      let newSort;
+
+      if (prevSort === "default" || prevSort === "des") {
+        sortedExpense = [...expenseList].sort((a, b) => a.category.localeCompare(b.category)); // Ascending
+        newSort = "asc";
+      } else {
+        sortedExpense = [...expenseList].sort((a, b) => b.category.localeCompare(a.category)); // Descending
+        newSort = "des";
+      }
+
+      setExpenseList(sortedExpense);
+      return newSort; // Correctly update sort state in the next render cycle
+    })
+  }
 
 
   const handlePageChange = (newPage) => {
@@ -117,7 +141,10 @@ const TransactionHistory = () => {
                     <FaSort className="cursor-pointer" onClick={handleSortDate} />
                   </div>
                 </th>
-                <th className="hidden lg:table-cell w-1/6">Category</th>
+                <th className="hidden lg:table-cell w-1/6">
+                  <div className="flex items-center justify-between pr-6 caret-transparent">Category
+                    {sort === "default" || sort === "des" ? <FaSortAlphaDown className="cursor-pointer" onClick={handleSortCategory} /> : <FaSortAlphaDownAlt className="cursor-pointer" onClick={handleSortCategory} />}
+                  </div></th>
                 <th className="w-1/6 caret-transparent">
                   <div className="flex items-center justify-between pr-6 ">
                     Amount
