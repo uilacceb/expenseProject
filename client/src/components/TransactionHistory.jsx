@@ -127,7 +127,7 @@ const TransactionHistory = () => {
 
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex h-screen">
       <ToggleMenu />
       <div className="flex flex-col flex-1 p-4 relative">
         <HamburgerMenu />
@@ -224,10 +224,8 @@ const TransactionHistory = () => {
           >
             Next
           </button>
-
         </div>
       </div>
-
     </div>
   )
 }
