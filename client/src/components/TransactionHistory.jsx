@@ -9,7 +9,7 @@ import { FiRefreshCcw } from "react-icons/fi";
 import { FaSort } from "react-icons/fa";
 import { FaSortAlphaDown } from "react-icons/fa";
 import { FaSortAlphaDownAlt } from "react-icons/fa";
-import Footer from "./Footer"
+
 
 
 
@@ -85,7 +85,7 @@ const TransactionHistory = () => {
   useEffect(() => {
     const updatePageSize = () => {
       if (window.innerWidth < 768) {
-        setPageSize(11); // Mobile: 11 items per page
+        setPageSize(10); // Mobile: 10 items per page
       } else {
         setPageSize(15); // Desktop: 15 items per page
       }
@@ -200,7 +200,7 @@ const TransactionHistory = () => {
             onClick={() => setToggleRefresh(prev => prev + 1)} />
         </div>
         {/* add expense button */}
-        <div className="text-right absolute bottom-20 right-2">
+        <div className="text-right absolute bottom-16 right-2">
           <Link to="/add-expense">
             <button className="bg-[#000000cb] text-white p-2 rounded-full shadow-md hover:scale-110 duration-150 hover:bg-[#000000b9]">
               <FaPlus size={50} />
@@ -208,7 +208,7 @@ const TransactionHistory = () => {
           </Link>
         </div>
         {/* pagination */}
-        <div className="font-semibold flex justify-center absolute left-1/2 lg:bottom-20 bottom-28 pr-10 -translate-x-1/2 p-2 rounded-md w-screen items-center lg:w-[50%] caret-transparent">
+        <div className="font-semibold flex justify-center absolute left-1/2 lg:bottom-20 bottom-24 pr-10 -translate-x-1/2 p-2 rounded-md w-screen items-center lg:w-[50%] caret-transparent">
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
