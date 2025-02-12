@@ -54,7 +54,7 @@ const ExpenseDetailMobile = () => {
             <p className="w-[190px] md:w-[300px]" >Category:</p><p className="flex-1 text-left">{category}</p>
           </div>
           <div className="text-white flex font-semibold font-mono">
-            <p className="w-[190px] md:w-[300px]" >Amount:</p><p className="flex-1 text-left">${amount}</p>
+            <p className="w-[190px] md:w-[300px]" >Amount:</p><p className="flex-1 text-left">${Math.abs(amount)}</p>
           </div>
           <div className="text-white flex font-semibold  font-mono ">
             <p className="w-[190px] md:w-[300px]">Description:</p>
