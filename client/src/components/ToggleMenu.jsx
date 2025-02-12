@@ -4,9 +4,8 @@ import { RiHistoryFill } from "react-icons/ri";
 import { useContext, useEffect } from "react";
 import { ExpenseContext } from "../App";
 import { Link } from "react-router-dom";
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
-import { googleLogout } from '@react-oauth/google';
 import { gettingAllExpense } from "../services/expenseService";
 import Footer from "./Footer";
 

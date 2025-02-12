@@ -9,10 +9,18 @@ dotenv.config()
 const app = express();
 
 // Move CORS and middleware setup to top
-app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:5174", "https://expense-project-frontend.vercel.app/"],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-}));
+// app.use(cors({
+//   origin: ["http://localhost:5173", "http://localhost:5174", "https://expense-project-frontend.vercel.app/"],
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+// }));
+app.use(
+  cors({
+    origin: "*", // Allow all origins
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(express.json())
 
