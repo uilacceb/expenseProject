@@ -10,7 +10,7 @@ const app = express();
 
 // Move CORS and middleware setup to top
 app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:5174", "https://expense-project-backend.vercel.app/"],
+  origin: ["http://localhost:5173", "http://localhost:5174", "https://expense-project-frontend.vercel.app/"],
   methods: ["GET", "POST", "PUT", "DELETE"],
 }));
 
