@@ -6,6 +6,7 @@ import ExpenseRouter from "./routes/expense.route.js";
 dotenv.config()
 
 const app = express();
+app.use(express.json())
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to expense Application" })
