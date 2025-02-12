@@ -2,7 +2,7 @@ import AddExpenseForm from "./components/AddExpenseForm";
 import Dashboard from "./components/Dashboard"
 import Layout from "./components/Layout"
 import { createContext, useState } from "react"
-import { Routes, Route, HashRouter } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import TransactionHistory from "./components/TransactionHistory";
 import ExpenseDetailMobile from "./components/ExpenseDetailMobile";
 import UpdateExpenseForm from "./components/UpdateExpenseForm"
@@ -25,7 +25,7 @@ function App() {
 
   return (
     <>
-      <HashRouter >
+      <Router>
         <ExpenseContext.Provider value={{ toggleHamburger, setToggleHamburger, user, setUser, date, setDate, category, setCategory, amount, setAmount, description, setDescription, note, setNote, expenseList, setExpenseList, isIncome, setIsIncome, balance, setBalance }}>
           <Routes>
             <Route path="/" element={<Layout><Dashboard /></Layout>} />
@@ -36,7 +36,7 @@ function App() {
           </Routes>
 
         </ExpenseContext.Provider>
-      </HashRouter  >
+      </Router >
     </>
   )
 }
