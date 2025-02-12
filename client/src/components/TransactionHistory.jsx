@@ -9,6 +9,7 @@ import { FiRefreshCcw } from "react-icons/fi";
 import { FaSort } from "react-icons/fa";
 import { FaSortAlphaDown } from "react-icons/fa";
 import { FaSortAlphaDownAlt } from "react-icons/fa";
+import Footer from "./Footer"
 
 
 
@@ -223,9 +224,10 @@ const TransactionHistory = () => {
           >
             Next
           </button>
-        </div>
 
+        </div>
       </div>
+
     </div>
   )
 }

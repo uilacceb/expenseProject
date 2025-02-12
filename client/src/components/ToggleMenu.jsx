@@ -8,6 +8,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import { googleLogout } from '@react-oauth/google';
 import { gettingAllExpense } from "../services/expenseService";
+import Footer from "./Footer";
 
 const ToggleMenu = () => {
   const { toggleHamburger, setToggleHamburger, user, setUser, setExpenseList } = useContext(ExpenseContext);
@@ -91,6 +92,9 @@ const ToggleMenu = () => {
       {/* Desktop Menu (always visible) */}
       <div className="hidden lg:block lg:w-[400px] max-h-screen bg-[#000000ea]">
         <MenuContent />
+      </div>
+      <div className="absolute lg:bottom-3 pl-14 bottom-1">
+        <Footer />
       </div></>
   )
 }
