@@ -75,7 +75,7 @@ const UpdateExpenseForm = () => {
 
   return (
     <div className="w-full h-full flex justify-center items-center">
-      <div className="bg-[#2B363C] p-4 rounded-md w-[90%] lg:h-[95%] h-[90vh] lg:w-[750px] lg:text-2xl flex justify-center items-center relative ">
+      <div className="bg-[#2B363C] p-4 rounded-md w-[90%] lg:h-[95%] h-[80vh] lg:w-[750px] lg:text-2xl flex justify-center items-center relative ">
         <Link to="/transaction-history">
           <button className="bg-red-500 rounded-md p-[2px] absolute top-3 right-4"><RiCloseFill color="white" size={24} /></button>
         </Link>
