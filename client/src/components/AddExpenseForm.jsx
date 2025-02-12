@@ -94,7 +94,7 @@ const AddExpenseForm = () => {
 
   return (
     <div className="w-full h-full flex justify-center items-center">
-      <div className="bg-[#2B363C] p-4 rounded-md w-[90%] h-[95%] lg:w-[750px] lg:text-2xl flex justify-center items-center relative ">
+      <div className="bg-[#2B363C] p-4 rounded-md w-[90%] lg:h-[95%] lg:w-[750px] lg:text-2xl flex justify-center items-center relative ">
         {/* close button */}
         <Link to="/">
           <button className="bg-red-500 rounded-md p-[2px] absolute top-3 right-4"><RiCloseFill color="white" size={24} /></button>

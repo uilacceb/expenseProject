@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import { gettingAllExpense } from "../services/expenseService";
-import Footer from "./Footer";
+// import Footer from "./Footer";
 
 const ToggleMenu = () => {
   const { toggleHamburger, setToggleHamburger, user, setUser, setExpenseList } = useContext(ExpenseContext);
@@ -92,9 +92,10 @@ const ToggleMenu = () => {
       <div className="hidden lg:block lg:w-[400px] max-h-screen bg-[#000000ea]">
         <MenuContent />
       </div>
-      <div className="absolute lg:bottom-3 pl-14 bottom-1">
+      {/* <div className="absolute lg:bottom-3 pl-14 bottom-1">
         <Footer />
-      </div></>
+      </div> */}
+    </>
   )
 }
 
