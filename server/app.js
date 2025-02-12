@@ -10,13 +10,12 @@ const app = express();
 
 // Move CORS and middleware setup to top
 app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:5174"],
+  origin: ["http://localhost:5173", "http://localhost:5174", "https://expense-project-backend.vercel.app/"],
   methods: ["GET", "POST", "PUT", "DELETE"],
 }));
 
 app.use(express.json())
 
-// Connect to database
 connectDB();
 
 app.get("/", (req, res) => {
@@ -24,7 +23,5 @@ app.get("/", (req, res) => {
 })
 
 app.use(ExpenseRouter)
-
-// Remove the app.listen() call - Vercel handles this
 
 export default app
