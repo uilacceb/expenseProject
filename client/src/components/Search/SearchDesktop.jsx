@@ -4,15 +4,11 @@ import PieChart from "./PieChart";
 import { ExpenseContext } from "../../App"
 
 const SearchDesktop = () => {
-  const { expenseList, user } = useContext(ExpenseContext)
+  const { expenseList, user, selectedYear, setSelectedYear, selectedMonth, setSelectedMonth, balanceSearch, setBalanceSearch, expenseSearch, setExpenseSearch, incomeSearch, setIncomeSearch, showError, setShowError, setIsLoading } = useContext(ExpenseContext)
 
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  const [selectedMonth, setSelectedMonth] = useState('');
+
+
   const [error, setError] = useState()
-  const [showError, setShowError] = useState(false);
-  const [balanceSearch, setBalanceSearch] = useState(0)
-  const [expenseSearch, setExpenseSearch] = useState(0)
-  const [incomeSearch, setIncomeSearch] = useState(0)
 
   // Generate year options from current year back to 1970
   const getYearOptions = () => {
@@ -61,20 +57,20 @@ const SearchDesktop = () => {
       setError("Please log in to add expenses!");
       return;
     }
-  
+
     // Reset the error message before searching
     setError("");
-  
+    setIsLoading(true)
     let filteredExpenses = [];
-  
+
     // Filtered expense list if user selects both year and month
     if (selectedMonth) {
       console.log(`Expense list: ${expenseList.map(element => element.date)}`);
-  
+
       filteredExpenses = expenseList.filter((expense) => {
         if (!expense.date) return false; // Prevent errors if date is missing
         console.log(`Year: ${expense.date.slice(0, 4)}, Month: ${expense.date.slice(5, 7)}`);
-  
+
         return (
           expense.date.slice(0, 4) === String(selectedYear) &&
           expense.date.slice(5, 7) === String(selectedMonth)
@@ -88,43 +84,45 @@ const SearchDesktop = () => {
         return expense.date.slice(0, 4) === String(selectedYear);
       });
     }
-  
+
     if (filteredExpenses.length === 0) {
       // Force an update by ensuring error state changes
       setTimeout(() => {
         setError("No expense found!");
       }, 0);
-  
+
       // Reset values to 0
       setBalanceSearch(0);
       setExpenseSearch(0);
       setIncomeSearch(0);
       return; // Stop further execution
     }
-  
+
     // If expenses are found, clear the error
     setError("");
-  
-    
+
+
     console.log(`Filtered expense list: ${filteredExpenses.map(element => element.date)}`);
-  
+
     // Calculate income and expenses separately
     const totalIncome = filteredExpenses.reduce((sum, expense) => {
       const amount = parseFloat(expense.amount) || 0;
       return amount > 0 ? sum + amount : sum;
     }, 0);
-  
+
     const totalExpense = filteredExpenses.reduce((sum, expense) => {
       const amount = parseFloat(expense.amount) || 0;
       return amount < 0 ? sum + Math.abs(amount) : sum;
     }, 0);
-  
+
     // Set values
     setIncomeSearch(totalIncome);
     setExpenseSearch(totalExpense);
     setBalanceSearch(totalIncome - totalExpense);
+
+    setIsLoading(false)
   };
-  
+
 
 
 

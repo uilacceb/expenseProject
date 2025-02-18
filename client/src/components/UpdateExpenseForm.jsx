@@ -108,6 +108,8 @@ const UpdateExpenseForm = () => {
                 <option value="Dessert">Dessert</option>
                 <option value="Gas">Gas</option>
                 <option value="Restaurant">Restaurant</option>
+                <option value="Subscription">Subscription</option>
+                <option value="Parking">Parking</option>
                 <option value="Pet">Pet</option>
                 <option value="Insurance">Insurance</option>
                 <option value="Shopping">Shopping</option>

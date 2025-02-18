@@ -24,11 +24,17 @@ function App() {
   const [isIncome, setIsIncome] = useState(false)
   const [balance, setBalance] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [selectedMonth, setSelectedMonth] = useState('');
+  const [showError, setShowError] = useState(false);
+  const [balanceSearch, setBalanceSearch] = useState(0)
+  const [expenseSearch, setExpenseSearch] = useState(0)
+  const [incomeSearch, setIncomeSearch] = useState(0)
 
   return (
     <>
       <Router>
-        <ExpenseContext.Provider value={{ toggleHamburger, setToggleHamburger, user, setUser, date, setDate, category, setCategory, amount, setAmount, description, setDescription, note, setNote, expenseList, setExpenseList, isIncome, setIsIncome, balance, setBalance, isLoading, setIsLoading }}>
+        <ExpenseContext.Provider value={{ toggleHamburger, setToggleHamburger, user, setUser, date, setDate, category, setCategory, amount, setAmount, description, setDescription, note, setNote, expenseList, setExpenseList, isIncome, setIsIncome, balance, setBalance, isLoading, setIsLoading, selectedYear, setSelectedYear, selectedMonth, setSelectedMonth, balanceSearch, setBalanceSearch, expenseSearch, setExpenseSearch, incomeSearch, setIncomeSearch, showError, setShowError }}>
           <Routes>
             <Route path="/" element={<Layout><Dashboard /></Layout>} />
             <Route path="/add-expense" element={<Layout><AddExpenseForm /></Layout>} />
