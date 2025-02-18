@@ -17,7 +17,7 @@ import loadingDot from "../assets/three-11928_256.gif"
 
 const TransactionHistory = () => {
   const { expenseList, setExpenseList, user, isLoading, setIsLoading } = useContext(ExpenseContext)
-  const [toggleRefresh, setToggleRefresh] = useState(0)
+  const [toggleRefresh, setToggleRefresh] = useState(0);
   const navigate = useNavigate()
 
   const [currentPage, setCurrentPage] = useState(1)

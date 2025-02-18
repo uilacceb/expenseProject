@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import { ExpenseContext } from "../App";
 import loadingDot from "../assets/three-11928_256.gif"
 
+
 const Balance = () => {
-  const { user, expenseList, balance, setBalance, isLoading, setIsLoading } = useContext(ExpenseContext)
+  const { user, expenseList, balance, setBalance, isLoading } = useContext(ExpenseContext)
 
   //test calculating 
-  
+
   // useEffect(() => {
   //   setTimeout(() => {
   //     setIsLoading(true);

@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import TransactionHistory from "./components/TransactionHistory";
 import ExpenseDetailMobile from "./components/ExpenseDetailMobile";
 import UpdateExpenseForm from "./components/UpdateExpenseForm"
+import Search from "./components/Search/Search";
 
 
 
@@ -34,6 +35,7 @@ function App() {
             <Route path="/update-expense/:id" element={<Layout><UpdateExpenseForm /></Layout>} />
             <Route path="/transaction-history" element={<Layout><TransactionHistory /></Layout>} />
             <Route path="/expense-detail/:id" element={<Layout><ExpenseDetailMobile /></Layout>} />
+            <Route path="/search" element={<Layout><Search /></Layout>} />
           </Routes>
 
         </ExpenseContext.Provider>

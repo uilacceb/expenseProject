@@ -1,6 +1,7 @@
 import { TbMenu2 } from "react-icons/tb";
 import { RxDashboard } from "react-icons/rx";
 import { RiHistoryFill } from "react-icons/ri";
+import { HiOutlineSearch } from "react-icons/hi";
 import { useContext, useEffect } from "react";
 import { ExpenseContext } from "../App";
 import { Link } from "react-router-dom";
@@ -74,6 +75,12 @@ const ToggleMenu = () => {
           <div className="toggleMenu-element-div ">
             <RiHistoryFill color="white" size={24} />
             <p className="text-white font-mono pl-4">Transaction History</p>
+          </div>
+        </Link>
+        <Link to="/search" onClick={() => setToggleHamburger(false)}>
+          <div className="toggleMenu-element-div ">
+            <HiOutlineSearch color="white" size={24} />
+            <p className="text-white font-mono pl-4">Search</p>
           </div>
         </Link>
       </div>
