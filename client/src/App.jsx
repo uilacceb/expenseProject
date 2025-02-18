@@ -22,11 +22,12 @@ function App() {
   const [expenseList, setExpenseList] = useState([])
   const [isIncome, setIsIncome] = useState(false)
   const [balance, setBalance] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
 
   return (
     <>
       <Router>
-        <ExpenseContext.Provider value={{ toggleHamburger, setToggleHamburger, user, setUser, date, setDate, category, setCategory, amount, setAmount, description, setDescription, note, setNote, expenseList, setExpenseList, isIncome, setIsIncome, balance, setBalance }}>
+        <ExpenseContext.Provider value={{ toggleHamburger, setToggleHamburger, user, setUser, date, setDate, category, setCategory, amount, setAmount, description, setDescription, note, setNote, expenseList, setExpenseList, isIncome, setIsIncome, balance, setBalance, isLoading, setIsLoading }}>
           <Routes>
             <Route path="/" element={<Layout><Dashboard /></Layout>} />
             <Route path="/add-expense" element={<Layout><AddExpenseForm /></Layout>} />

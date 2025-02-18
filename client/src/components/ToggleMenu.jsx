@@ -10,7 +10,7 @@ import { gettingAllExpense } from "../services/expenseService";
 // import Footer from "./Footer";
 
 const ToggleMenu = () => {
-  const { toggleHamburger, setToggleHamburger, user, setUser, setExpenseList } = useContext(ExpenseContext);
+  const { toggleHamburger, setToggleHamburger, user, setUser, setExpenseList, setIsLoading } = useContext(ExpenseContext);
 
   useEffect(() => {
     if (!user) return;
@@ -29,7 +29,8 @@ const ToggleMenu = () => {
 
   const handleLogout = () => {
     googleLogout();
-    setUser(null)
+    setUser(null);
+    setIsLoading(false)
   }
 
 

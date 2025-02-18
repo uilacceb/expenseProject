@@ -9,13 +9,14 @@ import { FiRefreshCcw } from "react-icons/fi";
 import { FaSort } from "react-icons/fa";
 import { FaSortAlphaDown } from "react-icons/fa";
 import { FaSortAlphaDownAlt } from "react-icons/fa";
+import loadingDot from "../assets/three-11928_256.gif"
 
 
 
 
 
 const TransactionHistory = () => {
-  const { expenseList, setExpenseList, user } = useContext(ExpenseContext)
+  const { expenseList, setExpenseList, user, isLoading, setIsLoading } = useContext(ExpenseContext)
   const [toggleRefresh, setToggleRefresh] = useState(0)
   const navigate = useNavigate()
 
@@ -25,6 +26,7 @@ const TransactionHistory = () => {
   const indexOfFirstExpense = indexOfLastExpense - pageSize;
   const currentExpenses = expenseList.slice(indexOfFirstExpense, indexOfLastExpense);
   const totalPages = Math.ceil(expenseList.length / pageSize);
+
 
   const [sort, setSort] = useState("default")
 
@@ -106,11 +108,17 @@ const TransactionHistory = () => {
       return;
     }
     const fetchExpense = async () => {
+      setIsLoading(true)
       try {
+
         const allExpense = await gettingAllExpense(user.sub);
         setExpenseList(allExpense);
+
       } catch (error) {
         console.error("Failed to fetch expense: ", error.message);
+      }
+      finally {
+        setIsLoading(false)
       }
     }
     fetchExpense()
@@ -160,35 +168,39 @@ const TransactionHistory = () => {
             </thead>
 
             <tbody>
-              {currentExpenses.length > 0 ? (currentExpenses.map((expense, index) => {
-                return (<><tr className="odd:bg-[#35424a] ">
-                  <td className="td_styling td_hidden ">{index + 1}</td>
-                  <td className="td_styling">{expense.date}</td>
-                  <td className="td_hidden td_styling">{expense.category}</td>
-                  <td style={{ color: expense.amount > 0 ? '#22c55e' : '#ef4444' }} className="td_styling">${(expense.amount).toFixed(2)}</td>
-                  <td className="td_hidden td_styling">{expense.description}</td>
-                  <td className="td_hidden td_styling text-wrap ">{expense.note}</td>
-                  <td className="td_hidden td_styling" >
-                    <div className="flex h-full items-center justify-start">
-                      <button
-                        className="bg-blue-400 py-1 px-[4px] text-white mx-1 font-semibold"
-                        onClick={() => navigate(`/update-expense/${expense._id}`)}>edit</button>
-                      <button
-                        className="bg-red-400 p-1 text-white  mx-1 font-semibold"
-                        onClick={() => handleDelete(expense._id, expense.userId)}>delete</button>
-                    </div>
-                  </td>
-                  {/* For smaller screens, we show a button */}
-                  <td className="lg:hidden td_styling">
-                    <div className="flex justify-start">
-                      <button
-                        className="bg-slate-200 py-[6px] px-[10px] font-semibold text-black"
-                        onClick={() => navigate(`/expense-detail/${expense._id}`)}>view</button>
-                    </div>
-                  </td>
-                </tr></>)
-              })) : (<tr className="odd:bg-[#35424a]" >
-                <td className="text-center p-2 font-mono font-semibold lg:text-[1.5vw]" colSpan="8">No expense found</td></tr>)}
+              {isLoading ? <tr className="odd:bg-[#35424a]" >
+                <td className="text-center p-2 font-mono font-semibold lg:text-[1.5vw]" colSpan="8">loading expense<img src={loadingDot} height={50} width={50} className=" inline filter invert brightness-0" /></td></tr> :
+
+                currentExpenses.length > 0 ? (currentExpenses.map((expense, index) => {
+                  return (<><tr className="odd:bg-[#35424a] ">
+                    <td className="td_styling td_hidden ">{index + 1}</td>
+                    <td className="td_styling">{expense.date}</td>
+                    <td className="td_hidden td_styling">{expense.category}</td>
+                    <td style={{ color: expense.amount > 0 ? '#22c55e' : '#ef4444' }} className="td_styling">${(expense.amount).toFixed(2)}</td>
+                    <td className="td_hidden td_styling">{expense.description}</td>
+                    <td className="td_hidden td_styling text-wrap ">{expense.note}</td>
+                    <td className="td_hidden td_styling" >
+                      <div className="flex h-full items-center justify-start">
+                        <button
+                          className="bg-blue-400 py-1 px-[4px] text-white mx-1 font-semibold"
+                          onClick={() => navigate(`/update-expense/${expense._id}`)}>edit</button>
+                        <button
+                          className="bg-red-400 p-1 text-white  mx-1 font-semibold"
+                          onClick={() => handleDelete(expense._id, expense.userId)}>delete</button>
+                      </div>
+                    </td>
+                    {/* For smaller screens, we show a button */}
+                    <td className="lg:hidden td_styling">
+                      <div className="flex justify-start">
+                        <button
+                          className="bg-slate-200 py-[6px] px-[10px] font-semibold text-black"
+                          onClick={() => navigate(`/expense-detail/${expense._id}`)}>view</button>
+                      </div>
+                    </td>
+                  </tr></>)
+                })) : (<tr className="odd:bg-[#35424a]" >
+                  <td className="text-center p-2 font-mono font-semibold lg:text-[1.5vw]" colSpan="8">No expense found</td></tr>)
+              }
             </tbody>
           </table>
         </div>
