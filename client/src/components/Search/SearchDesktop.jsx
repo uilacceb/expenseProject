@@ -1,4 +1,3 @@
-
 import { useContext, useEffect, useState } from "react";
 import PieChart from "./PieChart";
 import { ExpenseContext } from "../../App"
@@ -96,7 +95,6 @@ const SearchDesktop = () => {
       setBalanceSearch(0);
       setExpenseSearch(0);
       setIncomeSearch(0);
-      setFilteredList([])
       return; // Stop further execution
     }
 

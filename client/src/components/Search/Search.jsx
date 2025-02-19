@@ -23,9 +23,9 @@ const Search = () => {
 
     <div className="flex lg:h-screen h-[90%]">
       <ToggleMenu />
-      <div className="flex flex-col flex-1 p-4 relative">
+      <div className="flex flex-col flex-1 lg:p-0  p-4 relative">
         <HamburgerMenu />
-        <div className="flex flex-col flex-1 relative">
+        <div className="flex flex-col lg:max-h-screen flex-1 relative">
           {isMobile ? <SearchMobile /> : <SearchDesktop />}
         </div>
       </div>
