@@ -90,7 +90,7 @@ const PieChart = ({ expenses }) => { // Receive expenses as a prop
       title: {
         display: true,
         text: "Expense spent in category",
-
+       
       }
     }
   }
@@ -99,3 +99,4 @@ const PieChart = ({ expenses }) => { // Receive expenses as a prop
 };
 
 export default PieChart;
+

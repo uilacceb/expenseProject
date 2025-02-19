@@ -36,6 +36,7 @@ function App() {
     <>
       <Router>
         <ExpenseContext.Provider value={{ toggleHamburger, setToggleHamburger, user, setUser, date, setDate, category, setCategory, amount, setAmount, description, setDescription, note, setNote, expenseList, setExpenseList, isIncome, setIsIncome, balance, setBalance, isLoading, setIsLoading, selectedYear, setSelectedYear, selectedMonth, setSelectedMonth, balanceSearch, setBalanceSearch, expenseSearch, setExpenseSearch, incomeSearch, setIncomeSearch, showError, setShowError,filteredList, setFilteredList }}>
+        <ExpenseContext.Provider value={{ toggleHamburger, setToggleHamburger, user, setUser, date, setDate, category, setCategory, amount, setAmount, description, setDescription, note, setNote, expenseList, setExpenseList, isIncome, setIsIncome, balance, setBalance, isLoading, setIsLoading, selectedYear, setSelectedYear, selectedMonth, setSelectedMonth, balanceSearch, setBalanceSearch, expenseSearch, setExpenseSearch, incomeSearch, setIncomeSearch, showError, setShowError, filteredList, setFilteredList }}>
           <Routes>
             <Route path="/" element={<Layout><Dashboard /></Layout>} />
             <Route path="/add-expense" element={<Layout><AddExpenseForm /></Layout>} />
