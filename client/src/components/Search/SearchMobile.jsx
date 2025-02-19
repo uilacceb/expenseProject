@@ -117,10 +117,11 @@ const SearchMobile = () => {
     }, 0);
 
     // Set values
+    // Set values
     setIncomeSearch(totalIncome);
     setExpenseSearch(totalExpense);
     setBalanceSearch(totalIncome - totalExpense);
-
+    setFilteredList(filteredExpenses); 
     setIsLoading(false)
   };
 
