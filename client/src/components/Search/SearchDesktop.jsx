@@ -4,7 +4,7 @@ import PieChart from "./PieChart";
 import { ExpenseContext } from "../../App"
 
 const SearchDesktop = () => {
-  const { expenseList, user, selectedYear, setSelectedYear, selectedMonth, setSelectedMonth, balanceSearch, setBalanceSearch, expenseSearch, setExpenseSearch, incomeSearch, setIncomeSearch, showError, setShowError, setIsLoading } = useContext(ExpenseContext)
+  const { expenseList, user, selectedYear, setSelectedYear, selectedMonth, setSelectedMonth, balanceSearch, setBalanceSearch, expenseSearch, setExpenseSearch, incomeSearch, setIncomeSearch, showError, setShowError, setIsLoading, setFilteredList, filteredList } = useContext(ExpenseContext)
 
 
 
@@ -91,16 +91,31 @@ const SearchDesktop = () => {
         setError("No expense found!");
       }, 0);
 
+      setFilteredList((filteredExpenses));
       // Reset values to 0
       setBalanceSearch(0);
       setExpenseSearch(0);
       setIncomeSearch(0);
+      setFilteredList([])
       return; // Stop further execution
     }
 
     // If expenses are found, clear the error
     setError("");
 
+    const defineLabels = () => {
+      if (filteredList.length !== 0) {
+        let distinctCategory = [];
+        filteredList.map((expense) => {
+          if (!distinctCategory.includes(expense.category)) {
+            distinctCategory.push(expense.category)
+          }
+          console.log(distinctCategory)
+          return distinctCategory
+        })
+      }
+    }
+    defineLabels()
 
     console.log(`Filtered expense list: ${filteredExpenses.map(element => element.date)}`);
 
@@ -119,7 +134,7 @@ const SearchDesktop = () => {
     setIncomeSearch(totalIncome);
     setExpenseSearch(totalExpense);
     setBalanceSearch(totalIncome - totalExpense);
-
+    setFilteredList(filteredExpenses);
     setIsLoading(false)
   };
 
@@ -171,9 +186,13 @@ const SearchDesktop = () => {
       <div className="flex-1 min-h-0 flex p-4 m-8">
         {/* Chart Section */}
         <div className="w-3/5 h-full pr-4">
-          <div className="h-full rounded-lg shadow-lg bg-[#dcdcdc] p-4">
-            {/* <PieChart /> */}
-            <p className="flex justify-center items-center h-full text-[3vw] font-mono font-semibold"> Pie Chart Coming soon</p>
+          <div className="h-full rounded-lg bg-[#fffefeb1] w-full p-4 flex justify-center items-center">
+            {filteredList.length > 0 ? (
+              <PieChart expenses={filteredList} />
+            ) : (
+              <p className="text-center text-lg font-mono font-semibold text-gray-600">No expenses to display</p>
+            )}
+            {/* <p className="flex justify-center items-center h-full text-[3vw] font-mono font-semibold"> Pie Chart Coming soon</p> */}
           </div>
         </div>
 
