@@ -144,7 +144,7 @@ const SearchDesktop = () => {
   return (
     <div className="h-full w-full flex flex-col caret-transparent">
       {/* Search Controls */}
-      <div className="flex justify-around items-center p-4 bg-white">
+      <div className="flex justify-around items-center p-4 w-full  lg:bg-white">
         <div className="flex items-center">
           <label className="font-mono font-semibold text-lg pr-5">Year:</label>
           <select
@@ -197,7 +197,7 @@ const SearchDesktop = () => {
         {/* Stats Section */}
         <div className="w-2/5 bg-white rounded-lg shadow-lg p-6 caret-transparent  flex flex-col">
           <div className="flex flex-1 justify-center items-center">
-            {showError ? <p className=" text-red-500 font-semibold font-mono text-[1.1vw]">{error}</p> : <h1 className="text-center text-[1.3vw] font-semibold font-mono">Monthly Summary</h1>}
+            {showError ? <p className=" text-red-500 font-semibold font-mono text-[1.1vw]">{error}</p> : <h1 className="text-center lg:text-[1.3vw] text-[2vw] font-semibold font-mono">Monthly Summary</h1>}
 
           </div>
           <div className=" flex flex-col h-[90%] justify-evenly p-4">

@@ -88,7 +88,11 @@ const TransactionHistory = () => {
     const updatePageSize = () => {
       if (window.innerWidth < 768) {
         setPageSize(10); // Mobile: 10 items per page
-      } else {
+      }
+      else if (window.innerWidth >= 768 && window.innerWidth < 1025) {
+        setPageSize(10)
+      }
+      else {
         setPageSize(15); // Desktop: 15 items per page
       }
     };
@@ -212,30 +216,32 @@ const TransactionHistory = () => {
             onClick={() => setToggleRefresh(prev => prev + 1)} />
         </div>
         {/* add expense button */}
-        <div className="text-right absolute bottom-16 right-2">
-          <Link to="/add-expense">
-            <button className="bg-[#000000cb] text-white p-2 rounded-full shadow-md hover:scale-110 duration-150 hover:bg-[#000000b9]">
-              <FaPlus size={50} />
-            </button>
-          </Link>
-        </div>
+        <div className="fixed bottom-4 right-4 z-50">
+      <Link to="/add-expense">
+        <button className="bg-[#000000cb] text-white p-2 rounded-full shadow-md hover:scale-110 duration-150 hover:bg-[#000000b9]">
+          <FaPlus size={50} />
+        </button>
+      </Link>
+    </div>
         {/* pagination */}
-        <div className="font-semibold flex justify-center absolute left-1/2 lg:bottom-20 bottom-24 pr-10 -translate-x-1/2 p-2 rounded-md w-screen items-center lg:w-[50%] caret-transparent">
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-            className="lg:px-4 py-1 text-black rounded-md disabled:opacity-50 "
-          >
-            Previous
-          </button>
-          <span className="px-4"> Page {currentPage} of {totalPages}</span>
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className="lg:px-4  py-1 text-black rounded-md disabled:opacity-50"
-          >
-            Next
-          </button>
+        <div className="flex font-semibold justify-center items-center py-2 px-2 w-full">
+          <div className="flex items-center gap-4 caret-transparent">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="lg:px-4 py-1 text-black rounded-md disabled:opacity-50 "
+            >
+              Previous
+            </button>
+            <span className="px-4">Page {currentPage} of {totalPages}</span>
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="lg:px-4 py-1 text-black rounded-md disabled:opacity-50 "
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>
