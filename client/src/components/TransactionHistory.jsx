@@ -111,7 +111,7 @@ const TransactionHistory = () => {
       if (window.innerWidth < 768) {
         setPageSize(9); // Mobile: 10 items per page
       }
-      else if (window.innerWidth >= 768 && window.innerWidth < 1025) {
+      else if (window.innerWidth >= 768 && window.innerWidth <= 1025 || window.innerHeight <= 900) {
         setPageSize(10)
       }
       else {

@@ -94,13 +94,13 @@ const AddExpenseForm = () => {
 
   return (
     <div className="w-full h-full flex justify-center items-center">
-      <div className="bg-[#2B363C] p-4 rounded-md h-[90vh] lg:h-[95%] lg:w-[750px] lg:text-2xl flex justify-center items-center relative ">
+      <div className="bg-[#2B363C] p-3 rounded-md h-[95vh] lg:max-h-screen lg:w-[40vw] lg:text-[1.1em] flex justify-center items-center relative ">
         {/* close button */}
         <Link to="/">
           <button className="bg-red-500 rounded-md p-[2px] absolute top-3 right-4"><RiCloseFill color="white" size={24} /></button>
-        </Link>
-        <form className="h-full flex" onSubmit={handleAddExpense}>
-          <fieldset className="flex flex-col items-center md:w-[500px] lg:w-[500px] w-80 overflow-hidden ">
+        </Link>s
+        <form className="h-full flex justify-center items-center" onSubmit={handleAddExpense}>
+          <fieldset className="flex flex-col items-center md:w-[30vw] lg:w-[30vw] w-80  ">
             {/* date */}
             <div className="attribute_div">
               <label htmlFor="date" className="label_style">Date</label>
