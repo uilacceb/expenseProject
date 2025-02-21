@@ -116,8 +116,7 @@ const SearchMobile = () => {
       return amount < 0 ? sum + Math.abs(amount) : sum;
     }, 0);
 
-    // Set values
-    // Set values
+    
     setIncomeSearch(totalIncome);
     setExpenseSearch(totalExpense);
     setBalanceSearch(totalIncome - totalExpense);

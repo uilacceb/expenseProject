@@ -16,16 +16,23 @@ import loadingDot from "../assets/three-11928_256.gif"
 
 
 const TransactionHistory = () => {
-  const { expenseList, setExpenseList, user, isLoading, setIsLoading } = useContext(ExpenseContext)
+  const { expenseList, user, selectedYear, setSelectedYear, selectedMonth, setSelectedMonth, setShowError, setIsLoading, setFilteredList, filteredList, setExpenseList, isLoading } = useContext(ExpenseContext)
+
+  // const currentMonth = new Date().getMonth() + 1
+  // const currentYear = new Date().getFullYear()
+
+  const [error, setError] = useState()
   const [toggleRefresh, setToggleRefresh] = useState(0);
+  const [hasSearched, setHasSearched] = useState(false);
   const navigate = useNavigate()
 
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(15); // items per page
+
+
   const indexOfLastExpense = currentPage * pageSize;
   const indexOfFirstExpense = indexOfLastExpense - pageSize;
-  const currentExpenses = expenseList.slice(indexOfFirstExpense, indexOfLastExpense);
-  const totalPages = Math.ceil(expenseList.length / pageSize);
+
 
 
   const [sort, setSort] = useState("default")
@@ -35,10 +42,10 @@ const TransactionHistory = () => {
   const handleSortAmount = () => {
     let sortedExpense;
     if (sort === "default" || sort === "des") {
-      sortedExpense = [...expenseList].sort((a, b) => a.amount - b.amount);
+      sortedExpense = [...displayList].sort((a, b) => a.amount - b.amount);
       setSort("asc");
     } else if (sort === "asc") {
-      sortedExpense = [...expenseList].sort((a, b) => b.amount - a.amount);
+      sortedExpense = [...displayList].sort((a, b) => b.amount - a.amount);
       setSort("des");
     }
     setExpenseList(sortedExpense); // Update state with sorted list
@@ -47,14 +54,26 @@ const TransactionHistory = () => {
   // handle date sort
   const handleSortDate = () => {
     let sortedExpense;
-    if (sort === "default" || sort === "des") {
-      sortedExpense = [...expenseList].sort((a, b) => new Date(a.date) - new Date(b.date)); // Oldest to newest
-      setSort("asc");
-    } else if (sort === "asc") {
-      sortedExpense = [...expenseList].sort((a, b) => new Date(b.date) - new Date(a.date)); // Newest to oldest
-      setSort("des");
+    if (filteredList.length === 0) {
+      if (sort === "default" || sort === "des") {
+        sortedExpense = [...displayList].sort((a, b) => new Date(a.date) - new Date(b.date)); // Oldest to newest
+        setSort("asc");
+      } else if (sort === "asc") {
+        sortedExpense = [...displayList].sort((a, b) => new Date(b.date) - new Date(a.date)); // Newest to oldest
+        setSort("des");
+      }
+      setExpenseList(sortedExpense); // Update state with sorted list
     }
-    setExpenseList(sortedExpense); // Update state with sorted list
+    else if (!filteredList.length === 0) {
+      if (sort === "default" || sort === "des") {
+        sortedExpense = [...displayList].sort((a, b) => new Date(a.date) - new Date(b.date)); // Oldest to newest
+        setSort("asc");
+      } else if (sort === "asc") {
+        sortedExpense = [...displayList].sort((a, b) => new Date(b.date) - new Date(a.date)); // Newest to oldest
+        setSort("des");
+      }
+      setExpenseList(sortedExpense); // Update state with sorted list
+    }
   };
 
   //handle category sort
@@ -87,7 +106,7 @@ const TransactionHistory = () => {
   useEffect(() => {
     const updatePageSize = () => {
       if (window.innerWidth < 768) {
-        setPageSize(10); // Mobile: 10 items per page
+        setPageSize(9); // Mobile: 10 items per page
       }
       else if (window.innerWidth >= 768 && window.innerWidth < 1025) {
         setPageSize(10)
@@ -105,6 +124,10 @@ const TransactionHistory = () => {
     };
   }, []);
 
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filteredList]);
 
   useEffect(() => {
     if (!user) {
@@ -138,11 +161,135 @@ const TransactionHistory = () => {
   }
 
 
+  //handle filter year and month
+
+  const getYearOptions = () => {
+    const currentYear = new Date().getFullYear();
+    const years = [];
+    for (let year = currentYear; year >= 1970; year--) {
+      years.push(
+        <option key={year} value={year}>
+          {year}
+        </option>
+      );
+    }
+    return years;
+  };
+
+  // Months array for dropdown
+  const months = [
+    { value: '01', label: 'January' },
+    { value: '02', label: 'February' },
+    { value: '03', label: 'March' },
+    { value: '04', label: 'April' },
+    { value: '05', label: 'May' },
+    { value: '06', label: 'June' },
+    { value: '07', label: 'July' },
+    { value: '08', label: 'August' },
+    { value: '09', label: 'September' },
+    { value: '10', label: 'October' },
+    { value: '11', label: 'November' },
+    { value: '12', label: 'December' }
+  ];
+
+  useEffect(() => {
+    if (error) {
+      setShowError(true);
+      const timer = setTimeout(() => {
+        setShowError(false);
+      }, 2000);
+
+      // Cleanup the timer
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
+
+  const handleSearch = () => {
+    if (!user) {
+      setError("Please log in to search!");
+      return;
+    }
+
+    // Reset the error message before searching
+    setError("");
+    setIsLoading(true)
+    setHasSearched(true);
+    let filteredExpenses = [];
+
+    if (selectedMonth) {
+      filteredExpenses = expenseList.filter((expense) => {
+        return (
+          expense.date.slice(0, 4) === String(selectedYear) &&
+          expense.date.slice(5, 7) === String(selectedMonth)
+        );
+      });
+    } else {
+      filteredExpenses = expenseList.filter((expense) => {
+        return expense.date.slice(0, 4) === String(selectedYear);
+      });
+    }
+
+    setIsLoading(false);
+    setFilteredList(filteredExpenses);
+
+    if (filteredExpenses.length === 0) {
+      setError("No expense found!");
+    }
+  };
+  const displayList = hasSearched ? filteredList : expenseList;
+  const totalPages = Math.ceil(displayList.length / pageSize); // Update this line
+
+  // Keep the pagination slice
+  const currentExpenses = displayList.slice(indexOfFirstExpense, indexOfLastExpense);
+
+
+
   return (
     <div className="flex lg:h-screen h-[90%]">
       <ToggleMenu />
       <div className="flex flex-col flex-1 p-4 relative">
         <HamburgerMenu />
+        <div className="w-full flex flex-col lg:flex-row h-[20%] lg:h-auto caret-transparent mb-2 ">
+          <div className=" flex flex-1 justify-between items-center px-3 py-4 lg:w-full " >
+            <div className="pr-6 lg:flex lg:items-center">
+              <label className="font-mono font-semibold lg:pr-2">Year:</label>
+              <select
+                value={selectedYear}
+                onChange={(e) => setSelectedYear(Number(e.target.value))}
+                className="font-semibold px-2 py-1 border rounded bg-white lg:mr-4"
+              >
+
+                {getYearOptions()}
+              </select>
+            </div>
+
+            <div className="lg:flex lg:items-center">
+              <label className="font-mono font-semibold lg:pr-2">Month:</label>
+              <select
+                value={selectedMonth}
+                onChange={(e) => setSelectedMonth(e.target.value)}
+                className="font-semibold px-2 py-1 border rounded bg-white "
+              >
+                <option value="">Select a month</option>
+                {months.map(month => (
+                  <option key={month.value} value={month.value}>
+                    {month.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          {/* Search button */}
+          <div className=" text-center flex justify-center items-center flex-1">
+            <button
+              onClick={handleSearch}
+              className="bg-slate-700 text-white font-mono font-semibold px-5 py-1 rounded-xl hover:bg-slate-600 transition-colors"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+
         <div className="bg-[#2B363C] text-white font-mono">
           <table className="lg:table-fixed w-full ">
             <thead className="bg-[#100f0fbf]" >
@@ -172,8 +319,19 @@ const TransactionHistory = () => {
             </thead>
 
             <tbody>
-              {isLoading ? <tr className="odd:bg-[#35424a]" >
-                <td className="text-center p-2 font-mono font-semibold lg:text-[1.5vw]" colSpan="8">loading expense<img src={loadingDot} height={50} width={50} className=" inline filter invert brightness-0" /></td></tr> :
+              {isLoading ? (
+                <tr className="odd:bg-[#35424a]">
+                  <td className="text-center p-2 font-mono font-semibold lg:text-[1.5vw]" colSpan="8">
+                    loading expense<img src={loadingDot} height={50} width={50} className="inline filter invert brightness-0" />
+                  </td>
+                </tr>
+              ) : hasSearched && filteredList.length === 0 ? (
+                <tr className="odd:bg-[#35424a]">
+                  <td className="text-center p-2 font-mono font-semibold lg:text-[1.5vw] caret-transparent" colSpan="8">
+                    {error ? error : "No expense found"}
+                  </td>
+                </tr>
+              ) :
 
                 currentExpenses.length > 0 ? (currentExpenses.map((expense, index) => {
                   return (<><tr className="odd:bg-[#35424a] ">
@@ -203,7 +361,7 @@ const TransactionHistory = () => {
                     </td>
                   </tr></>)
                 })) : (<tr className="odd:bg-[#35424a]" >
-                  <td className="text-center p-2 font-mono font-semibold lg:text-[1.5vw]" colSpan="8">No expense found</td></tr>)
+                  <td className="text-center p-2 font-mono font-semibold lg:text-[1.5vw] caret-transparent" colSpan="8">{error ? error : "No expense found"}</td></tr>)
               }
             </tbody>
           </table>
@@ -217,12 +375,12 @@ const TransactionHistory = () => {
         </div>
         {/* add expense button */}
         <div className="fixed bottom-4 right-4 z-50">
-      <Link to="/add-expense">
-        <button className="bg-[#000000cb] text-white p-2 rounded-full shadow-md hover:scale-110 duration-150 hover:bg-[#000000b9]">
-          <FaPlus size={50} />
-        </button>
-      </Link>
-    </div>
+          <Link to="/add-expense">
+            <button className="bg-[#000000cb] text-white p-2 rounded-full shadow-md hover:scale-110 duration-150 hover:bg-[#000000b9]">
+              <FaPlus size={50} />
+            </button>
+          </Link>
+        </div>
         {/* pagination */}
         <div className="flex font-semibold justify-center items-center py-2 px-2 w-full">
           <div className="flex items-center gap-4 caret-transparent">

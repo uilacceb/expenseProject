@@ -53,7 +53,7 @@ const SearchDesktop = () => {
 
   const handleSearch = () => {
     if (!user) {
-      setError("Please log in to add expenses!");
+      setError("Please log in to search details!");
       return;
     }
 
