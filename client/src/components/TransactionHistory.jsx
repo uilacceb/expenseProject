@@ -48,54 +48,57 @@ const TransactionHistory = () => {
       sortedExpense = [...displayList].sort((a, b) => b.amount - a.amount);
       setSort("des");
     }
-    setExpenseList(sortedExpense); // Update state with sorted list
-  }
+
+    // Update the appropriate list based on whether we're showing filtered results
+    if (hasSearched) {
+      setFilteredList(sortedExpense);
+    } else {
+      setExpenseList(sortedExpense);
+    }
+  };
 
   // handle date sort
   const handleSortDate = () => {
     let sortedExpense;
-    if (filteredList.length === 0) {
-      if (sort === "default" || sort === "des") {
-        sortedExpense = [...displayList].sort((a, b) => new Date(a.date) - new Date(b.date)); // Oldest to newest
-        setSort("asc");
-      } else if (sort === "asc") {
-        sortedExpense = [...displayList].sort((a, b) => new Date(b.date) - new Date(a.date)); // Newest to oldest
-        setSort("des");
-      }
-      setExpenseList(sortedExpense); // Update state with sorted list
+    if (sort === "default" || sort === "des") {
+      sortedExpense = [...displayList].sort((a, b) => new Date(a.date) - new Date(b.date));
+      setSort("asc");
+    } else if (sort === "asc") {
+      sortedExpense = [...displayList].sort((a, b) => new Date(b.date) - new Date(a.date));
+      setSort("des");
     }
-    else if (!filteredList.length === 0) {
-      if (sort === "default" || sort === "des") {
-        sortedExpense = [...displayList].sort((a, b) => new Date(a.date) - new Date(b.date)); // Oldest to newest
-        setSort("asc");
-      } else if (sort === "asc") {
-        sortedExpense = [...displayList].sort((a, b) => new Date(b.date) - new Date(a.date)); // Newest to oldest
-        setSort("des");
-      }
-      setExpenseList(sortedExpense); // Update state with sorted list
+
+    if (hasSearched) {
+      setFilteredList(sortedExpense);
+    } else {
+      setExpenseList(sortedExpense);
     }
   };
 
-  //handle category sort
-  // Uses localeCompare() – Ensures proper alphabetical sorting.
-  // Uses Functional setSort() – Prevents state update delays.
+  // handle category sort
   const handleSortCategory = () => {
     setSort((prevSort) => {
       let sortedExpense;
       let newSort;
 
       if (prevSort === "default" || prevSort === "des") {
-        sortedExpense = [...expenseList].sort((a, b) => a.category.localeCompare(b.category)); // Ascending
+        sortedExpense = [...displayList].sort((a, b) => a.category.localeCompare(b.category));
         newSort = "asc";
       } else {
-        sortedExpense = [...expenseList].sort((a, b) => b.category.localeCompare(a.category)); // Descending
+        sortedExpense = [...displayList].sort((a, b) => b.category.localeCompare(a.category));
         newSort = "des";
       }
 
-      setExpenseList(sortedExpense);
-      return newSort; // Correctly update sort state in the next render cycle
-    })
-  }
+      // Update the appropriate list based on whether we're showing filtered results
+      if (hasSearched) {
+        setFilteredList(sortedExpense);
+      } else {
+        setExpenseList(sortedExpense);
+      }
+
+      return newSort;
+    });
+  };
 
 
   const handlePageChange = (newPage) => {
