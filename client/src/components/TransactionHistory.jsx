@@ -112,7 +112,7 @@ const TransactionHistory = () => {
         setPageSize(9); // Mobile: 10 items per page
       }
       else if (window.innerWidth >= 768 && window.innerWidth <= 1025 || window.innerHeight <= 900) {
-        setPageSize(10)
+        setPageSize(8)
       }
       else {
         setPageSize(15); // Desktop: 15 items per page
@@ -252,8 +252,8 @@ const TransactionHistory = () => {
       <ToggleMenu />
       <div className="flex flex-col flex-1 p-4 relative">
         <HamburgerMenu />
-        <div className="w-full flex flex-col lg:flex-row h-[20%] lg:h-auto caret-transparent mb-2 ">
-          <div className=" flex flex-1 justify-between items-center px-3 py-4 lg:w-full " >
+        <div className="w-full flex flex-col md:flex-row lg:flex-row h-[20%] lg:h-auto caret-transparent mb-2  md:pl-6">
+          <div className=" flex flex-1 justify-around items-center px-3 py-4 lg:w-full md:ml-20" >
             <div className="pr-6 lg:flex lg:items-center">
               <label className="font-mono font-semibold lg:pr-2">Year:</label>
               <select

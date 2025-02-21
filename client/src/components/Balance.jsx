@@ -32,10 +32,10 @@ const Balance = () => {
 
   return (
     <div className="flex flex-1 h-[90%] p-3 pt-0 justify-center">
-      <div className="bg-[#2B363C] relative w-[88%] md:h-full h-[88%] flex justify-center ">
+      <div className="bg-[#2B363C] relative w-[88%] md:h-[70vh] h-[88%] flex justify-center ">
         <div className="flex flex-col h-[100%]">
           <p className="flex justify-center items-center text-white font-mono font-semibold h-[25%] pt-2 lg:text-[4vw] text-[8vw] caret-transparent">Your balance: </p>
-          <p className="text-white flex justify-center items-center font-mono font-semibold  w-full  h-[75%]  lg:text-[12vw] text-[18vw] caret-transparent">
+          <p className="text-white flex justify-center items-center font-mono font-semibold  w-full h-[75%] md:text-[11.9vw] lg:text-[12vw] text-[18vw] caret-transparent">
             {user ? isLoading ?
               <span className="lg:text-[6vw] text-[6vw]">
                 Calculating
