@@ -293,22 +293,22 @@ const TransactionHistory = () => {
           </div>
         </div>
 
-        <div className="bg-[#2B363C] text-white font-mono ">
-          <table className="lg:table-fixed w-full ">
+        <div className="bg-[#2B363C] text-white font-mono max-w-screen">
+          <table className="lg:table-fixed w-full">
             <thead className="bg-[#100f0fbf]" >
               <tr className=" h-[50px] text-left ">
                 <th className="hidden lg:table-cell w-1/12">#</th>
-                <th className="w-2/5 lg:w-1/5  lg:text-left text-center caret-transparent">
+                <th className="w-1/5 lg:text-left text-center caret-transparent">
                   <div className="flex items-center lg:justify-between justify-center lg:pr-6 ">
                     Date
                     <FaSort className="cursor-pointer" onClick={handleSortDate} />
                   </div>
                 </th>
-                <th className="hidden lg:table-cell lg:w-1/6">
+                <th className="hidden lg:table-cell w-1/6">
                   <div className="flex items-center justify-between pr-6 caret-transparent">Category
                     {sort === "default" || sort === "des" ? <FaSortAlphaDown className="cursor-pointer" onClick={handleSortCategory} /> : <FaSortAlphaDownAlt className="cursor-pointer" onClick={handleSortCategory} />}
                   </div></th>
-                <th className="w-2/5 lg:w-1/6 caret-transparent">
+                <th className="w-1/6 caret-transparent">
                   <div className="flex items-center justify-between pr-6 ">
                     Amount
                     <FaSort className="cursor-pointer" onClick={handleSortAmount} />
@@ -317,7 +317,7 @@ const TransactionHistory = () => {
                 <th className="hidden lg:table-cell w-1/6">Description</th>
                 <th className="hidden lg:table-cell w-1/6">Note</th>
                 <th className="hidden lg:table-cell w-1/6">Action</th>
-                <th className=" lg:hidden  w-1/5">Details</th>
+                <th className=" lg:hidden  w-1/6">Details</th>
               </tr>
             </thead>
 
@@ -339,9 +339,9 @@ const TransactionHistory = () => {
                 currentExpenses.length > 0 ? (currentExpenses.map((expense, index) => {
                   return (<><tr className="odd:bg-[#35424a] ">
                     <td className="td_styling td_hidden ">{index + 1}</td>
-                    <td className="td_styling p-2 w-2/5 lg:w-1/5">{expense.date}</td>
+                    <td className="td_styling">{expense.date}</td>
                     <td className="td_hidden td_styling">{expense.category}</td>
-                    <td style={{ color: expense.amount > 0 ? '#22c55e' : '#ef4444' }} className="td_styling p-2 w-2/5 lg:w-1/6">${(expense.amount).toFixed(2)}</td>
+                    <td style={{ color: expense.amount > 0 ? '#22c55e' : '#ef4444' }} className="td_styling">${(expense.amount).toFixed(2)}</td>
                     <td className="td_hidden td_styling">{expense.description}</td>
                     <td className="td_hidden td_styling text-wrap ">{expense.note}</td>
                     <td className="td_hidden td_styling" >
@@ -355,7 +355,7 @@ const TransactionHistory = () => {
                       </div>
                     </td>
                     {/* For smaller screens, we show a button */}
-                    <td className="lg:hidden td_styling p-2 w-1/5">
+                    <td className="lg:hidden td_styling">
                       <div className="flex justify-start">
                         <button
                           className="bg-slate-200 py-[6px] px-[10px] font-semibold text-black"
