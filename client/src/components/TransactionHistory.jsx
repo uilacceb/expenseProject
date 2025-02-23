@@ -294,12 +294,12 @@ const TransactionHistory = () => {
         </div>
 
         <div className="bg-[#2B363C] text-white font-mono">
-          <table className="lg:table-fixed w-full ">
+          <table className="table-fixed md:table-auto  w-full ">
             <thead className="bg-[#100f0fbf]" >
               <tr className=" h-[50px] text-left ">
                 <th className="hidden lg:table-cell w-1/12">#</th>
                 <th className="w-1/5 lg:text-left text-center caret-transparent">
-                  <div className="flex items-center lg:justify-between justify-center lg:pr-6 pl-5 ">
+                  <div className="flex items-center lg:justify-between justify-center lg:pr-6 ">
                     Date
                     <FaSort className="cursor-pointer" onClick={handleSortDate} />
                   </div>

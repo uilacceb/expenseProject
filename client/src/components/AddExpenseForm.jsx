@@ -98,7 +98,7 @@ const AddExpenseForm = () => {
         {/* close button */}
         <Link to="/">
           <button className="bg-red-500 rounded-md p-[2px] absolute top-3 right-4"><RiCloseFill color="white" size={24} /></button>
-        </Link>s
+        </Link>
         <form className="h-full flex justify-center items-center" onSubmit={handleAddExpense}>
           <fieldset className="flex flex-col items-center md:w-[30vw] lg:w-[30vw] w-80  ">
             {/* date */}
