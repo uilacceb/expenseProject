@@ -293,31 +293,31 @@ const TransactionHistory = () => {
           </div>
         </div>
 
-        <div className="bg-[#2B363C] text-white font-mono">
-          <table className="lg:table-fixed table-auto w-full">
+        <div className="bg-[#2B363C] text-white font-mono overflow-x-auto">
+          <table className="table-auto w-full ">
             <thead className="bg-[#100f0fbf]" >
               <tr className=" h-[50px] text-left ">
-                <th className="hidden lg:table-cell">#</th>
-                <th className="lg:text-left text-center caret-transparent">
+                <th className="hidden lg:table-cell w-1/12">#</th>
+                <th className="w-1/5 lg:text-left text-center caret-transparent">
                   <div className="flex items-center lg:justify-between justify-center lg:pr-6 ">
                     Date
                     <FaSort className="cursor-pointer" onClick={handleSortDate} />
                   </div>
                 </th>
-                <th className="hidden lg:table-cell">
+                <th className="hidden lg:table-cell w-1/6">
                   <div className="flex items-center justify-between pr-6 caret-transparent">Category
                     {sort === "default" || sort === "des" ? <FaSortAlphaDown className="cursor-pointer" onClick={handleSortCategory} /> : <FaSortAlphaDownAlt className="cursor-pointer" onClick={handleSortCategory} />}
                   </div></th>
-                <th className="caret-transparent">
+                <th className="w-1/6 caret-transparent">
                   <div className="flex items-center justify-between pr-6 ">
                     Amount
                     <FaSort className="cursor-pointer" onClick={handleSortAmount} />
                   </div>
                 </th>
-                <th className="hidden lg:table-cell">Description</th>
-                <th className="hidden lg:table-cell">Note</th>
-                <th className="hidden lg:table-cell">Action</th>
-                <th className="lg:hidden">Details</th>
+                <th className="hidden lg:table-cell w-1/6">Description</th>
+                <th className="hidden lg:table-cell w-1/6">Note</th>
+                <th className="hidden lg:table-cell w-1/6">Action</th>
+                <th className=" lg:hidden  w-1/6">Details</th>
               </tr>
             </thead>
 

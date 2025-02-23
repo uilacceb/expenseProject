@@ -130,7 +130,7 @@ const SearchMobile = () => {
 
 
   return (
-    <div className=" caret-transparent">
+    <div className="caret-transparent">
       {/* Search Controls */}
       <div className="w-full flex flex-col h-[18%]">
         <div className=" bg-white flex flex-1 justify-center items-center px-3 py-4 " >
