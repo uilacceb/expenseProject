@@ -103,7 +103,8 @@ const ToggleMenu = () => {
         </button>
         <MenuContent />
         <div className="absolute right-3 bottom-3 text-center">
-          <button className="bg-slate-500 font-mono text-white p-2 text-center rounded-md hover:bg-slate-700">Buy me a coffee☕</button>
+          <a href="https://buymeacoffee.com/uilacceb" target="_blank">
+            <button className="bg-slate-500 font-mono text-white p-2 text-center rounded-md hover:bg-slate-700">Buy my cat a can 😽</button></a>
         </div>
       </div>
 
