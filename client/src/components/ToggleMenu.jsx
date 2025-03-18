@@ -102,15 +102,23 @@ const ToggleMenu = () => {
           <TbMenu2 size={24} onClick={() => setToggleHamburger(!toggleHamburger)} />
         </button>
         <MenuContent />
+        <div className="absolute right-3 bottom-3 text-center">
+          <button className="bg-slate-500 font-mono text-white p-2 text-center rounded-md hover:bg-slate-700">Buy me a coffee☕</button>
+        </div>
       </div>
 
       {/* Desktop Menu (always visible) */}
-      <div className="hidden lg:block lg:w-[400px] max-h-screen bg-[#000000ea]">
+      <div className="hidden lg:block lg:w-[400px] max-h-screen bg-[#000000ea] relative">
         <MenuContent />
+        <div className="absolute right-3 bottom-3 text-center">
+          <a href="https://buymeacoffee.com/uilacceb" target="_blank">
+            <button className="bg-slate-500 font-mono text-white p-2 text-center rounded-md hover:bg-slate-700">Buy me a coffee☕</button></a>
+        </div>
       </div>
       {/* <div className="absolute lg:bottom-3 pl-14 bottom-1">
         <Footer />
       </div> */}
+
     </>
   )
 }
