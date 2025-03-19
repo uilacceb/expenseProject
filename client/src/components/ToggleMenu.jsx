@@ -102,9 +102,9 @@ const ToggleMenu = () => {
           <TbMenu2 size={24} onClick={() => setToggleHamburger(!toggleHamburger)} />
         </button>
         <MenuContent />
-        <div className="absolute right-3 bottom-3 text-center">
+        <div className="absolute left-8 bottom-[35%] text-center">
           <a href="https://buymeacoffee.com/uilacceb" target="_blank">
-            <button className="bg-slate-500 font-mono text-white p-2 text-center rounded-md hover:bg-slate-700">Buy my cat a can 😽</button></a>
+            <button className="font-mono text-white p-2 text-center rounded-md hover:bg-slate-700">Buy my cat a can? 😽</button></a>
         </div>
       </div>
 
@@ -113,7 +113,7 @@ const ToggleMenu = () => {
         <MenuContent />
         <div className="absolute right-3 bottom-3 text-center">
           <a href="https://buymeacoffee.com/uilacceb" target="_blank">
-            <button className="bg-slate-500 font-mono text-white p-2 text-center rounded-md hover:bg-slate-700">Buy my cat a can 😽</button></a>
+            <button className="font-mono text-white p-2 text-center rounded-md hover:bg-slate-700 ">Buy my cat a can? 😽</button></a>
         </div>
       </div>
       {/* <div className="absolute lg:bottom-3 pl-14 bottom-1">
