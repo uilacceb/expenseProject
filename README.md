@@ -3,6 +3,8 @@
 
 ExpenseTracker is a comprehensive personal finance application that helps users track, analyze, and manage their expenses. With intuitive visualization tools, filtering options, and secure Google authentication, it simplifies financial management and provides insights into spending habits.
 
+## Try it yourself
+https://expense-project-frontend.vercel.app/
 
 ## Features
 
@@ -64,7 +66,6 @@ ExpenseTracker is a comprehensive personal finance application that helps users 
 2. **Transaction History**: Review all transactions with sorting and filtering options
 3. **Search & Analytics**: Explore spending patterns through pie charts and summary statistics
 
-## Development Process
-
+## Author
 
 Created by Rebecca - feel free to contact me!
